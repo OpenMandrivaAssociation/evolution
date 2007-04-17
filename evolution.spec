@@ -10,8 +10,8 @@
 
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
-Version: 2.10.0
-Release: %mkrel 5
+Version: 2.10.1
+Release: %mkrel 1
 License: 	GPL
 Group:		Networking/Mail
 Source0: 	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
@@ -29,8 +29,6 @@ Patch23:	evolution-2.4.1-fixplugin.patch
 Patch24:	evolution-2.6.1-fixepluginwarning.patch
 # gw fix bug #29703, use unversioned help file and dir
 Patch25:	evolution-2.10.0-help-path.patch
-# (fc) 2.18.0-4mdv security fix for CVE-2007-1002
-Patch26:	evolution-2.18.0-CVE-2007-1002.patch
 URL: 		http://www.gnome.org/projects/evolution/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 
@@ -61,7 +59,7 @@ BuildRequires: openldap-devel
 BuildRequires: libnotify-devel >= 0.3.0
 BuildRequires: gnome-icon-theme
 BuildRequires: perl-XML-Parser
-BuildRequires: gnome-doc-utils libxslt-proc
+BuildRequires: gnome-doc-utils
 BuildRequires: scrollkeeper
 BuildRequires: desktop-file-utils
 #gw if we run aclocal
@@ -132,7 +130,6 @@ with mono.
 %patch23 -p1 -b .fixplugin
 %patch24 -p1 -b .fixepluginwarning
 %patch25 -p1 -b .help-path
-%patch26 -p1 -b .CVE-2007-1002
 
 #needed by patch25
 automake-1.9
@@ -385,5 +382,3 @@ cat %name.lang >> %{name}-%{major_version}.lang
 %dir %{_libdir}/evolution/%{major_version}/conduits
 %{_libdir}/evolution/%{major_version}/conduits/*.so
 %{_datadir}/gnome-pilot/conduits/*
-
-
