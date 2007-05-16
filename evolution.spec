@@ -76,7 +76,8 @@ personal information-management tool.
 Summary:	Libraries and include files for developing Evolution components
 Group:		Development/GNOME and GTK+
 Requires:	%{name} = %{version}-%{release}
-Requires:   libgnomeui2-devel
+# gw all other devel deps are expressed by pkgconfig() deps
+Requires:  libgtkhtml-3.14-devel >= %{gtkhtml_version_required}
 Obsoletes:	libevolution0-devel
 Provides:	libevolution0-devel
 
