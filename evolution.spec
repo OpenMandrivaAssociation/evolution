@@ -78,6 +78,7 @@ Group:		Development/GNOME and GTK+
 Requires:	%{name} = %{version}-%{release}
 # gw all other devel deps are expressed by pkgconfig() deps
 Requires:  libgtkhtml-3.14-devel >= %{gtkhtml_version_required}
+Requires:  libgnomeprintui-devel
 Obsoletes:	libevolution0-devel
 Provides:	libevolution0-devel
 
