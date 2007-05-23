@@ -11,7 +11,7 @@
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
 Version: 2.10.1
-Release: %mkrel 1
+Release: %mkrel 2
 License: 	GPL
 Group:		Networking/Mail
 Source0: 	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
@@ -29,6 +29,8 @@ Patch23:	evolution-2.4.1-fixplugin.patch
 Patch24:	evolution-2.6.1-fixepluginwarning.patch
 # gw fix bug #29703, use unversioned help file and dir
 Patch25:	evolution-2.10.0-help-path.patch
+# (pt) fix a crash when reopening an encrypted sent mail (gnome bug #315012)
+Patch26:	evolution-2.10.1-crashencryptedsent.patch
 URL: 		http://www.gnome.org/projects/evolution/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 
@@ -132,6 +134,7 @@ with mono.
 %patch23 -p1 -b .fixplugin
 %patch24 -p1 -b .fixepluginwarning
 %patch25 -p1 -b .help-path
+%patch26 -p0 -b .crashencryptedsent
 
 #needed by patch25
 automake-1.9
