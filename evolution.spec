@@ -1,17 +1,17 @@
-%define major_version 2.10
+%define major_version 2.12
 %define gtkhtml_version_required 3.14.0
 %define gnomepilot_version_required 2.0.14
 %define gnomespell_version_required 1.0.5
 %define libsoup_version_required 2.2.2
-%define eds_version_required 1.9.4
+%define eds_version_required 1.11.1
 %define with_mono 1
 %{?_without_mono:	%{expand: %%global with_mono 0}}
 %{?_with_mono:	%{expand: %%global with_mono 1}}
 
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
-Version: 2.10.2
-Release: %mkrel 2
+Version: 2.11.3
+Release: %mkrel 1
 License: 	GPL
 Group:		Networking/Mail
 Source0: 	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
@@ -20,19 +20,11 @@ Source3:	evolution_32.png
 Source4:	evolution_16.png
 Patch:		evolution-2.2.3-no-diagnostics.patch
 # (fc) 1.5.94.1-4mdk import welcome mail from indexhtml
-Patch17:	evolution-2.5.4-firstmail.patch
+Patch17:	evolution-2.11.3-firstmail.patch
 # (fc) 2.2.3-5mdk enable autocompletion on personal addressbook when creating it (Mdk bug #16427)
 Patch18:	evolution-2.2.3-defaultcompletion.patch
 # (fc) 2.2.3-10mdk fix inline audio plugin extension
 Patch23:	evolution-2.4.1-fixplugin.patch
-# (fc) 2.6.1-1mdk fix eplugin warning
-Patch24:	evolution-2.6.1-fixepluginwarning.patch
-# gw fix bug #29703, use unversioned help file and dir
-Patch25:	evolution-2.10.0-help-path.patch
-# (pt) fix a crash when reopening an encrypted sent mail (gnome bug #315012)
-Patch26:	evolution-2.10.1-crashencryptedsent.patch
-# (fc) 2.10.2-2mdv prevent camel warning about null parameter (GNOME bug #439957)
-Patch27:	evolution-2.10.2-camelexception.patch
 URL: 		http://www.gnome.org/projects/evolution/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 
@@ -134,19 +126,6 @@ with mono.
 %patch17 -p1 -b .firstmail
 %patch18 -p1 -b .defaultcompletion
 %patch23 -p1 -b .fixplugin
-%patch24 -p1 -b .fixepluginwarning
-%patch25 -p1 -b .help-path
-%patch26 -p0 -b .crashencryptedsent
-%patch27 -p1 -b .camelexception
-
-#needed by patch25
-automake-1.9
-
-#needed by patch25
-for i in help/*/evolution.xml ; do
- mv $i "`dirname $i`/`basename $i .xml`-%{major_version}.xml"
-done
-mv help/evolution.omf.in help/evolution-%{major_version}.omf.in
 
 %build
 
@@ -311,6 +290,7 @@ cat %name.lang >> %{name}-%{major_version}.lang
  %{_libdir}/evolution/%{major_version}/plugins/libmail-account-disable.*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-addressbook-file.*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-audio-inline.*
+ %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-b*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-c*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-d*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-bbdb.*
@@ -327,6 +307,7 @@ cat %name.lang >> %{name}-%{major_version}.lang
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-p*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-s*
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-a*
+ %{_libdir}/evolution/%{major_version}/plugins/org-gnome-b*
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-c*
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-d*
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-bbdb.eplug
@@ -341,6 +322,7 @@ cat %name.lang >> %{name}-%{major_version}.lang
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-gw-account-setup.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-itip-formatter.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-imap*
+ %{_libdir}/evolution/%{major_version}/plugins/org-gnome-mail-notification*
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-mail-account-disable.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-mail-to-task.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-mail-to-task.xml
@@ -365,7 +347,7 @@ cat %name.lang >> %{name}-%{major_version}.lang
 %{_datadir}/evolution
 %{_datadir}/idl/*
 %{_datadir}/mime-info/*
-%_datadir/icons/hicolor/*/apps/evolution*
+%_datadir/icons/hicolor/*/apps/*
 %{_iconsdir}/*.png
 %{_liconsdir}/*.png
 %{_miconsdir}/*.png
