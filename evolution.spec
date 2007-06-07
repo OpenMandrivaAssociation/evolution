@@ -11,7 +11,7 @@
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
 Version: 2.11.3
-Release: %mkrel 1
+Release: %mkrel 2
 License: 	GPL
 Group:		Networking/Mail
 Source0: 	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
@@ -254,7 +254,8 @@ cat %name.lang >> %{name}-%{major_version}.lang
 %clean
 [ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
 
-%define schemas apps_evolution_addressbook-%{major_version} apps_evolution_calendar-%{major_version} apps_evolution_shell-%{major_version} evolution-mail-%{major_version}
+%define schemas apps-evolution-mail-notification apps-evolution-mail-prompts-checkdefault apps_evolution_addressbook apps_evolution_calendar apps_evolution_shell bogo-junk-plugin evolution-mail
+
 
 %post
 %{update_scrollkeeper}
@@ -273,7 +274,13 @@ cat %name.lang >> %{name}-%{major_version}.lang
 %files -f %{name}-%{major_version}.lang
 %defattr(-, root, root)
 %doc AUTHORS COPYING ChangeLog NEWS README
-%{_sysconfdir}/gconf/schemas/*
+%_sysconfdir/gconf/schemas/apps-evolution-mail-notification.schemas
+%_sysconfdir/gconf/schemas/apps-evolution-mail-prompts-checkdefault.schemas
+%_sysconfdir/gconf/schemas/apps_evolution_addressbook.schemas
+%_sysconfdir/gconf/schemas/apps_evolution_calendar.schemas
+%_sysconfdir/gconf/schemas/apps_evolution_shell.schemas
+%_sysconfdir/gconf/schemas/bogo-junk-plugin.schemas
+%_sysconfdir/gconf/schemas/evolution-mail.schemas
 %{_bindir}/*
 %{_libdir}/bonobo/servers/*
 %dir %{_libdir}/evolution
