@@ -1,5 +1,5 @@
 %define major_version 2.12
-%define gtkhtml_version_required 3.14.0
+%define gtkhtml_version_required 3.15.5
 %define gnomepilot_version_required 2.0.14
 %define gnomespell_version_required 1.0.5
 %define libsoup_version_required 2.2.2
@@ -10,7 +10,7 @@
 
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
-Version: 2.11.4
+Version: 2.11.5
 Release: %mkrel 1
 License: 	GPL
 Group:		Networking/Mail
@@ -254,7 +254,7 @@ cat %name.lang >> %{name}-%{major_version}.lang
 %clean
 [ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
 
-%define schemas apps-evolution-mail-notification apps-evolution-mail-prompts-checkdefault apps_evolution_addressbook apps_evolution_calendar apps_evolution_shell bogo-junk-plugin evolution-mail
+%define schemas apps-evolution-mail-notification apps-evolution-mail-prompts-checkdefault apps_evolution_addressbook apps_evolution_calendar apps_evolution_shell bogo-junk-plugin evolution-mail apps-evolution-attachment-reminder-2.12
 
 
 %post
@@ -277,6 +277,7 @@ cat %name.lang >> %{name}-%{major_version}.lang
 %_sysconfdir/gconf/schemas/apps-evolution-mail-notification.schemas
 %_sysconfdir/gconf/schemas/apps-evolution-mail-prompts-checkdefault.schemas
 %_sysconfdir/gconf/schemas/apps_evolution_addressbook.schemas
+%_sysconfdir/gconf/schemas/apps-evolution-attachment-reminder-2.12.schemas
 %_sysconfdir/gconf/schemas/apps_evolution_calendar.schemas
 %_sysconfdir/gconf/schemas/apps_evolution_shell.schemas
 %_sysconfdir/gconf/schemas/bogo-junk-plugin.schemas
@@ -294,12 +295,14 @@ cat %name.lang >> %{name}-%{major_version}.lang
 %{_libdir}/evolution/%{major_version}/evolution-alarm-notify
 %{_libdir}/evolution/%{major_version}/killev
 %dir %{_libdir}/evolution/%{major_version}/plugins
+ %{_libdir}/evolution/%{major_version}/plugins/attachment-reminder.glade
  %{_libdir}/evolution/%{major_version}/plugins/libmail-account-disable.*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-addressbook-file.*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-audio-inline.*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-b*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-c*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-d*
+ %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-attachment-reminder.so
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-bbdb.*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-caldav.so
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-hula*
@@ -317,6 +320,7 @@ cat %name.lang >> %{name}-%{major_version}.lang
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-b*
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-c*
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-d*
+ %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-attachment-reminder.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-bbdb.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-caldav.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-hula-account-setup.eplug
