@@ -3,14 +3,14 @@
 %define gnomepilot_version_required 2.0.14
 %define gnomespell_version_required 1.0.5
 %define libsoup_version_required 2.2.2
-%define eds_version_required 1.11.1
+%define eds_version_required 1.11.6
 %define with_mono 1
 %{?_without_mono:	%{expand: %%global with_mono 0}}
 %{?_with_mono:	%{expand: %%global with_mono 1}}
 
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
-Version: 2.11.5
+Version: 2.11.6
 Release: %mkrel 1
 License: 	GPL
 Group:		Networking/Mail
@@ -244,7 +244,7 @@ rm -rf $RPM_BUILD_ROOT%{_libdir}/gnome-pilot/conduits/*.{a,la} \
  $RPM_BUILD_ROOT%{_libdir}/evolution/%{major_version}/plugins/*.la \
  $RPM_BUILD_ROOT%{_libdir}/evolution/%{major_version}/camel-providers/*.{a,la} \
  $RPM_BUILD_ROOT%{_libdir}/evolution/%{major_version}/conduits/*.la \
- %buildroot/var/lib/scrollkeeper
+ %buildroot/var/lib/
 
 
 %{find_lang} %{name}-%{major_version} --with-gnome
@@ -306,6 +306,7 @@ cat %name.lang >> %{name}-%{major_version}.lang
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-bbdb.*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-caldav.so
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-hula*
+ %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-face*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-imap*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-mail-attachments-import-ics.so
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-startup-wizard*
@@ -327,6 +328,7 @@ cat %name.lang >> %{name}-%{major_version}.lang
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-mail-attachments-import-ics.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-startup-wizard.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-exchange*
+ %{_libdir}/evolution/%{major_version}/plugins/org-gnome-face*
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-folder-permissions.xml
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-folder-subscription.xml
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-groupwise-features.eplug
