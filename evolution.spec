@@ -147,45 +147,6 @@ mkdir -p $RPM_BUILD_ROOT%{_iconsdir}  $RPM_BUILD_ROOT%{_liconsdir}  $RPM_BUILD_R
 cp -f %{SOURCE2} $RPM_BUILD_ROOT%{_liconsdir}/evolution.png
 cp -f %{SOURCE3} $RPM_BUILD_ROOT%{_iconsdir}/evolution.png
 cp -f %{SOURCE4} $RPM_BUILD_ROOT%{_miconsdir}/evolution.png
-mkdir -p $RPM_BUILD_ROOT%{_menudir}
-cat << EOF > $RPM_BUILD_ROOT%{_menudir}/%{name}
-?package(%{name}): \
-	command="%{_bindir}/evolution -c mail" \
-	icon="evolution.png" \
-	needs="X11" \
-	section="Networking/Mail" \
-	title="Evolution Email" \
-	longtitle="GNOME mailer, calendar, contact manager and communications tool" \
-	startup_notify="true" \
-	xdg="true"
-?package(%{name}): \
-	command="%{_bindir}/evolution -c contacts" \
-	icon="evolution.png" \
-	needs="X11" \
-	section="Office/Address Books" \
-	title="Evolution Contacts" \
-	longtitle="GNOME mailer, calendar, contact manager and communications tool" \
-	startup_notify="true" \
-	xdg="true"
-?package(%{name}): \
-	command="%{_bindir}/evolution -c calendar" \
-	icon="evolution.png" \
-	needs="X11" \
-	section="Office/Time Management" \
-	title="Evolution Calendar" \
-	longtitle="GNOME mailer, calendar, contact manager and communications tool" \
-	startup_notify="true" \
-	xdg="true"
-?package(%{name}): \
-	command="%{_bindir}/evolution -c tasks" \
-	icon="evolution.png" \
-	needs="X11" \
-	section="Office/Tasks Management" \
-	title="Evolution Tasks" \
-	longtitle="GNOME mailer, calendar, contact manager and communications tool" \
-	startup_notify="true" \
-	xdg="true"
-EOF
 
 desktop-file-install --vendor="" \
   --remove-category="Application" \
@@ -364,7 +325,6 @@ cat %name.lang >> %{name}-%{major_version}.lang
 %{_iconsdir}/*.png
 %{_liconsdir}/*.png
 %{_miconsdir}/*.png
-%{_menudir}/%{name}
 %{_datadir}/omf/*
 
 %files -n %{name}-devel
