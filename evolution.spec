@@ -149,55 +149,11 @@ cp -f %{SOURCE3} $RPM_BUILD_ROOT%{_iconsdir}/evolution.png
 cp -f %{SOURCE4} $RPM_BUILD_ROOT%{_miconsdir}/evolution.png
 
 desktop-file-install --vendor="" \
-  --remove-category="Application" \
   --remove-category="Office" \
   --remove-category="Calendar" \
   --remove-category="ContactManagement" \
-  --add-category="Email" \
   --add-category="Network" \
-  --add-category="X-MandrivaLinux-Internet-Mail" \
   --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/evolution.desktop
-sed -i -e 's/X-GNOME-Bugzilla-OtherBinaries=/X-GNOME-Bugzilla-OtherBinaries=evolution-2.10;/g' $RPM_BUILD_ROOT%{_datadir}/applications/evolution.desktop
-
-sed -i -e 's/Exec=evolution-%{major_version}/Exec=evolution -c mail/g' $RPM_BUILD_ROOT%{_datadir}/applications/evolution.desktop
-
-cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}-contacts.desktop << EOF
-[Desktop Entry]
-Encoding=UTF-8
-Name=Evolution Contacts
-Comment=GNOME mailer, calendar, contact manager and communications tool
-Exec=%{_bindir}/evolution -c contacts
-Icon=%{name}
-Terminal=false
-Type=Application
-StartupNotify=true
-Categories=GNOME;GTK;Office;ContactManagement;X-MandrivaLinux-Office-AddressBook
-EOF
-
-cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}-calendar.desktop << EOF
-[Desktop Entry]
-Encoding=UTF-8
-Name=Evolution Calendar
-Comment=GNOME mailer, calendar, contact manager and communications tool
-Exec=%{_bindir}/evolution -c calendar
-Icon=%{name}
-Terminal=false
-Type=Application
-StartupNotify=true
-Categories=GNOME;GTK;Office;Calendar;X-MandrivaLinux-Office-TimeManagement
-EOF
-cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}-tasks.desktop << EOF
-[Desktop Entry]
-Encoding=UTF-8
-Name=Evolution Tasks
-Comment=GNOME mailer, calendar, contact manager and communications tool
-Exec=%{_bindir}/evolution -c tasks
-Icon=%{name}
-Terminal=false
-Type=Application
-StartupNotify=true
-Categories=GNOME;GTK;Office;ProjectManagement;X-MandrivaLinux-Office-TasksManagement
-EOF
 
 #remove unpackaged files
 rm -rf $RPM_BUILD_ROOT%{_libdir}/gnome-pilot/conduits/*.{a,la} \
