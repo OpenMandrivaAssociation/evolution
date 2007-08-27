@@ -10,7 +10,7 @@
 
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
-Version: 2.11.90
+Version: 2.11.91
 Release: %mkrel 1
 License: 	GPL
 Group:		Networking/Mail
@@ -171,7 +171,7 @@ cat %name.lang >> %{name}-%{major_version}.lang
 %clean
 [ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
 
-%define schemas apps-evolution-mail-notification apps-evolution-mail-prompts-checkdefault apps_evolution_addressbook apps_evolution_calendar apps_evolution_shell bogo-junk-plugin evolution-mail apps-evolution-attachment-reminder-2.12
+%define schemas apps-evolution-mail-notification apps-evolution-mail-prompts-checkdefault apps_evolution_addressbook apps_evolution_calendar apps_evolution_shell bogo-junk-plugin evolution-mail apps-evolution-attachment-reminder
 
 
 %post
@@ -194,7 +194,7 @@ cat %name.lang >> %{name}-%{major_version}.lang
 %_sysconfdir/gconf/schemas/apps-evolution-mail-notification.schemas
 %_sysconfdir/gconf/schemas/apps-evolution-mail-prompts-checkdefault.schemas
 %_sysconfdir/gconf/schemas/apps_evolution_addressbook.schemas
-%_sysconfdir/gconf/schemas/apps-evolution-attachment-reminder-2.12.schemas
+%_sysconfdir/gconf/schemas/apps-evolution-attachment-reminder.schemas
 %_sysconfdir/gconf/schemas/apps_evolution_calendar.schemas
 %_sysconfdir/gconf/schemas/apps_evolution_shell.schemas
 %_sysconfdir/gconf/schemas/bogo-junk-plugin.schemas
