@@ -11,7 +11,7 @@
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
 Version: 2.11.92
-Release: %mkrel 1
+Release: %mkrel 2
 License: 	GPL
 Group:		Networking/Mail
 Source0: 	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
@@ -23,8 +23,8 @@ Patch:		evolution-2.2.3-no-diagnostics.patch
 Patch17:	evolution-2.11.3-firstmail.patch
 # (fc) 2.2.3-5mdk enable autocompletion on personal addressbook when creating it (Mdk bug #16427)
 Patch18:	evolution-2.2.3-defaultcompletion.patch
-# (fc) 2.2.3-10mdk fix inline audio plugin extension
-Patch23:	evolution-2.4.1-fixplugin.patch
+# (fc) 2.11.92-2mdv port audio-inline plugin to gstreamer 0.10 (GNOME bug #329629)
+Patch19:	evolution-2.11.92-gst010.patch
 URL: 		http://www.gnome.org/projects/evolution/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 
@@ -37,6 +37,7 @@ Requires: scrollkeeper >= 0.3
 Requires: spamassassin
 Requires: gtk+2.0 >= 2.4.0
 Requires: indexhtml >= 10.1
+Suggests: gstreamer0.10-plugins-good
 BuildRequires: bison flex
 BuildRequires: dbus-devel
 BuildRequires: libgnomeprintui-devel
@@ -47,7 +48,7 @@ BuildRequires: gtk-doc
 BuildRequires: intltool
 BuildRequires: krb5-devel 
 BuildRequires: libgnomeui2-devel
-BuildRequires: libgstreamer0.8-devel
+BuildRequires: libgstreamer0.10-devel
 BuildRequires: libgtkhtml-3.14-devel >= %{gtkhtml_version_required}
 BuildRequires: libsoup-devel >= %{libsoup_version_required}
 BuildRequires: nss-devel 
@@ -125,7 +126,10 @@ with mono.
 %patch -p1 -b .diagnostics
 %patch17 -p1 -b .firstmail
 %patch18 -p1 -b .defaultcompletion
-%patch23 -p1 -b .fixplugin
+%patch19 -p1 -b .gst010
+
+#needed by patch19
+autoconf
 
 %build
 
