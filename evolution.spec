@@ -11,7 +11,7 @@
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
 Version: 2.11.92
-Release: %mkrel 2
+Release: %mkrel 3
 License: 	GPL
 Group:		Networking/Mail
 Source0: 	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
@@ -25,6 +25,10 @@ Patch17:	evolution-2.11.3-firstmail.patch
 Patch18:	evolution-2.2.3-defaultcompletion.patch
 # (fc) 2.11.92-2mdv port audio-inline plugin to gstreamer 0.10 (GNOME bug #329629)
 Patch19:	evolution-2.11.92-gst010.patch
+# (fc) 2.11.92-3mdv don't show "submit bugreport" in help menu
+Patch20:	evolution-2.11.92-nobugbuddy.patch
+# (fc) 2.11.92-3mdv configure default sound notification (Mdv bug #29414)
+Patch21:	evolution-2.11.92-soundnotification.patch
 URL: 		http://www.gnome.org/projects/evolution/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 
@@ -38,6 +42,7 @@ Requires: spamassassin
 Requires: gtk+2.0 >= 2.4.0
 Requires: indexhtml >= 10.1
 Suggests: gstreamer0.10-plugins-good
+Suggests: gnome-audio
 BuildRequires: bison flex
 BuildRequires: dbus-devel
 BuildRequires: libgnomeprintui-devel
@@ -127,6 +132,8 @@ with mono.
 %patch17 -p1 -b .firstmail
 %patch18 -p1 -b .defaultcompletion
 %patch19 -p1 -b .gst010
+%patch20 -p1 -b .nobugbuddy
+%patch21 -p1 -b .defaultsound
 
 #needed by patch19
 autoconf
