@@ -10,8 +10,8 @@
 
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
-Version: 2.11.92
-Release: %mkrel 3
+Version: 2.12.0
+Release: %mkrel 1
 License: 	GPL
 Group:		Networking/Mail
 Source0: 	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
@@ -23,8 +23,6 @@ Patch:		evolution-2.2.3-no-diagnostics.patch
 Patch17:	evolution-2.11.3-firstmail.patch
 # (fc) 2.2.3-5mdk enable autocompletion on personal addressbook when creating it (Mdk bug #16427)
 Patch18:	evolution-2.2.3-defaultcompletion.patch
-# (fc) 2.11.92-2mdv port audio-inline plugin to gstreamer 0.10 (GNOME bug #329629)
-Patch19:	evolution-2.11.92-gst010.patch
 # (fc) 2.11.92-3mdv don't show "submit bugreport" in help menu
 Patch20:	evolution-2.11.92-nobugbuddy.patch
 # (fc) 2.11.92-3mdv configure default sound notification (Mdv bug #29414)
@@ -131,7 +129,6 @@ with mono.
 %patch -p1 -b .diagnostics
 %patch17 -p1 -b .firstmail
 %patch18 -p1 -b .defaultcompletion
-%patch19 -p1 -b .gst010
 %patch20 -p1 -b .nobugbuddy
 %patch21 -p1 -b .defaultsound
 
@@ -283,7 +280,6 @@ cat %name.lang >> %{name}-%{major_version}.lang
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-save-calendar.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-select-one-source.eplug
 %{_libdir}/evolution/%{major_version}/plugins/org-gnome-subject-thread.eplug
-%{_libdir}/evolution/%{major_version}/plugins/publish-calendar.glade
 %{_datadir}/applications/*
 %{_datadir}/evolution
 %{_datadir}/idl/*
