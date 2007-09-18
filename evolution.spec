@@ -36,11 +36,11 @@ Requires: gtkhtml-3.14 >= %{gtkhtml_version_required}
 Requires: gnome-spell >= %{gnomespell_version_required}
 Requires: gnupg
 Requires: scrollkeeper >= 0.3
-Requires: spamassassin
 Requires: gtk+2.0 >= 2.4.0
 Requires: indexhtml >= 10.1
 Suggests: gstreamer0.10-plugins-good
 Suggests: gnome-audio
+Suggests: spamassassin
 BuildRequires: bison flex
 BuildRequires: dbus-devel
 BuildRequires: libgnomeprintui-devel
