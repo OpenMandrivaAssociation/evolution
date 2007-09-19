@@ -163,6 +163,21 @@ desktop-file-install --vendor="" \
   --add-category="Network" \
   --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/evolution.desktop
 
+mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/xdg/autostart/ 
+
+cat << EOF > $RPM_BUILD_ROOT%{_sysconfdir}/xdg/autostart/evolution-alarm-notify.desktop
+[Desktop Entry]
+Encoding=UTF-8
+Name=Evolution Alarm Notifier
+Comment=Evolution Alarm Notifier
+Icon=stock_alarm
+Exec=%{_libdir}/evolution/%{major_version}/evolution-alarm-notify
+Terminal=false
+Type=Application
+OnlyShowIn=GNOME;
+Categories=
+EOF
+
 #remove unpackaged files
 rm -rf $RPM_BUILD_ROOT%{_libdir}/gnome-pilot/conduits/*.{a,la} \
  $RPM_BUILD_ROOT%{_libdir}/evolution/%{major_version}/components/*.{a,la} \
@@ -199,6 +214,7 @@ cat %name.lang >> %{name}-%{major_version}.lang
 %files -f %{name}-%{major_version}.lang
 %defattr(-, root, root)
 %doc AUTHORS COPYING ChangeLog NEWS README
+%{_sysconfdir}/xdg/autostart/*.desktop
 %_sysconfdir/gconf/schemas/apps-evolution-mail-notification.schemas
 %_sysconfdir/gconf/schemas/apps-evolution-mail-prompts-checkdefault.schemas
 %_sysconfdir/gconf/schemas/apps_evolution_addressbook.schemas
