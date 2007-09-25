@@ -11,7 +11,7 @@
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
 Version: 2.12.0
-Release: %mkrel 1
+Release: %mkrel 2
 License: 	GPL
 Group:		Networking/Mail
 Source0: 	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
@@ -27,6 +27,8 @@ Patch18:	evolution-2.2.3-defaultcompletion.patch
 Patch20:	evolution-2.11.92-nobugbuddy.patch
 # (fc) 2.11.92-3mdv configure default sound notification (Mdv bug #29414)
 Patch21:	evolution-2.11.92-soundnotification.patch
+# (fc) 2.12.0-2mdv force build of backup-restore plugin (Mdv bug #34096)
+Patch22:	evolution-2.12.0-backup-plugin.patch
 URL: 		http://www.gnome.org/projects/evolution/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 
@@ -131,8 +133,9 @@ with mono.
 %patch18 -p1 -b .defaultcompletion
 %patch20 -p1 -b .nobugbuddy
 %patch21 -p1 -b .defaultsound
+%patch22 -p1 -b .backup-plugin
 
-#needed by patch19
+#needed by patch22
 autoconf
 
 %build
@@ -234,6 +237,7 @@ cat %name.lang >> %{name}-%{major_version}.lang
 %{_libdir}/evolution/%{major_version}/components/*.so
 %{_libdir}/evolution/%{major_version}/*.so.*
 %{_libdir}/evolution/%{major_version}/evolution-alarm-notify
+%{_libdir}/evolution/%{major_version}/evolution-backup
 %{_libdir}/evolution/%{major_version}/killev
 %dir %{_libdir}/evolution/%{major_version}/plugins
  %{_libdir}/evolution/%{major_version}/plugins/attachment-reminder.glade
@@ -295,7 +299,8 @@ cat %name.lang >> %{name}-%{major_version}.lang
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-sa-junk-plugin.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-save-calendar.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-select-one-source.eplug
-%{_libdir}/evolution/%{major_version}/plugins/org-gnome-subject-thread.eplug
+ %{_libdir}/evolution/%{major_version}/plugins/org-gnome-subject-thread.eplug
+ %{_libdir}/evolution/%{major_version}/plugins/org-gnome-subject-thread.eplug
 %{_datadir}/applications/*
 %{_datadir}/evolution
 %{_datadir}/idl/*
