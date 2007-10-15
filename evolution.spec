@@ -10,8 +10,8 @@
 
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
-Version: 2.12.0
-Release: %mkrel 2
+Version: 2.12.1
+Release: %mkrel 1
 License: 	GPL
 Group:		Networking/Mail
 Source0: 	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
@@ -27,8 +27,6 @@ Patch18:	evolution-2.2.3-defaultcompletion.patch
 Patch20:	evolution-2.11.92-nobugbuddy.patch
 # (fc) 2.11.92-3mdv configure default sound notification (Mdv bug #29414)
 Patch21:	evolution-2.11.92-soundnotification.patch
-# (fc) 2.12.0-2mdv force build of backup-restore plugin (Mdv bug #34096)
-Patch22:	evolution-2.12.0-backup-plugin.patch
 URL: 		http://www.gnome.org/projects/evolution/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 
@@ -133,10 +131,6 @@ with mono.
 %patch18 -p1 -b .defaultcompletion
 %patch20 -p1 -b .nobugbuddy
 %patch21 -p1 -b .defaultsound
-%patch22 -p1 -b .backup-plugin
-
-#needed by patch22
-autoconf
 
 %build
 
