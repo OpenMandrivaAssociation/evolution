@@ -61,7 +61,7 @@ BuildRequires: openldap-devel
 BuildRequires: hal-devel
 BuildRequires: libnotify-devel >= 0.3.0
 #gw needed by the tnef plugin
-#BuildRequires: libytnef-devel
+BuildRequires: libytnef-devel
 BuildRequires: gnome-icon-theme
 BuildRequires: perl-XML-Parser
 BuildRequires: gnome-doc-utils
