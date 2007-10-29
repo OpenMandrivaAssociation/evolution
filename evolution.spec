@@ -20,7 +20,7 @@ Source3:	evolution_32.png
 Source4:	evolution_16.png
 Patch:		evolution-2.2.3-no-diagnostics.patch
 #gw it doesn't build in 2.21.1 (upstream bug #491386)
-Patch1: evolution-2.21.1-no-mail-remote-plugin.patch
+Patch1: evolution-2.21.1-fix-mail-remote-plugin.patch
 # (fc) 1.5.94.1-4mdk import welcome mail from indexhtml
 Patch17:	evolution-2.11.3-firstmail.patch
 # (fc) 2.2.3-5mdk enable autocompletion on personal addressbook when creating it (Mdk bug #16427)
@@ -137,8 +137,6 @@ with mono.
 %patch18 -p1 -b .defaultcompletion
 %patch20 -p1 -b .nobugbuddy
 %patch21 -p1 -b .defaultsound
-#patch1
-autoconf
 
 %build
 
@@ -261,6 +259,7 @@ cat %name.lang >> %{name}-%{major_version}.lang
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-imap*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-ipod-sync-evolution.so
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-mail-attachments-import-ics.so
+ %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-mail-remote.so
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-startup-wizard*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-exchange-operations.*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-g*
@@ -280,6 +279,7 @@ cat %name.lang >> %{name}-%{major_version}.lang
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-google.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-hula-account-setup.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-mail-attachments-import-ics.eplug
+ %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-mail-remote.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-startup-wizard.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-exchange*
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-external-editor.*
