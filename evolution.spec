@@ -1,16 +1,16 @@
-%define major_version 2.12
+%define major_version 2.22
 %define gtkhtml_version_required 3.15.5
 %define gnomepilot_version_required 2.0.14
 %define gnomespell_version_required 1.0.5
 %define libsoup_version_required 2.2.2
-%define eds_version_required 1.11.90
+%define eds_version_required 2.21.1
 %define with_mono 1
 %{?_without_mono:	%{expand: %%global with_mono 0}}
 %{?_with_mono:	%{expand: %%global with_mono 1}}
 
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
-Version: 2.12.1
+Version: 2.21.1
 Release: %mkrel 1
 License: 	GPL
 Group:		Networking/Mail
@@ -19,6 +19,8 @@ Source2:	evolution_48.png
 Source3:	evolution_32.png
 Source4:	evolution_16.png
 Patch:		evolution-2.2.3-no-diagnostics.patch
+#gw it doesn't build in 2.21.1 (upstream bug #491386)
+Patch1: evolution-2.21.1-no-mail-remote-plugin.patch
 # (fc) 1.5.94.1-4mdk import welcome mail from indexhtml
 Patch17:	evolution-2.11.3-firstmail.patch
 # (fc) 2.2.3-5mdk enable autocompletion on personal addressbook when creating it (Mdk bug #16427)
@@ -42,7 +44,7 @@ Suggests: gstreamer0.10-plugins-good
 Suggests: gnome-audio
 Suggests: spamassassin
 BuildRequires: bison flex
-BuildRequires: dbus-devel
+BuildRequires: dbus-glib-devel
 BuildRequires: libgnomeprintui-devel
 BuildRequires: evolution-data-server-devel >= %{eds_version_required}
 BuildRequires: gnome-pilot-devel >= %{gnomepilot_version_required}
@@ -56,7 +58,10 @@ BuildRequires: libgtkhtml-3.14-devel >= %{gtkhtml_version_required}
 BuildRequires: libsoup-devel >= %{libsoup_version_required}
 BuildRequires: nss-devel 
 BuildRequires: openldap-devel 
+BuildRequires: hal-devel
 BuildRequires: libnotify-devel >= 0.3.0
+#gw needed by the tnef plugin
+BuildRequires: libytnef-devel
 BuildRequires: gnome-icon-theme
 BuildRequires: perl-XML-Parser
 BuildRequires: gnome-doc-utils
@@ -127,14 +132,18 @@ with mono.
 %prep
 %setup -q
 %patch -p1 -b .diagnostics
+%patch1 -p1
 %patch17 -p1 -b .firstmail
 %patch18 -p1 -b .defaultcompletion
 %patch20 -p1 -b .nobugbuddy
 %patch21 -p1 -b .defaultsound
+#patch1
+autoconf
 
 %build
 
 %configure2_5x --enable-pilot-conduits=yes \
+--enable-plugins=experimental \
 --with-krb5=%{_prefix} --with-krb5-libs=%{_libdir} --without-krb4 \
 --with-openldap=yes --with-static-ldap=no --with-sub-version="-%{release}" --enable-ipv6 --enable-default_binary \
 %if %with_mono
@@ -244,9 +253,13 @@ cat %name.lang >> %{name}-%{major_version}.lang
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-attachment-reminder.so
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-bbdb.*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-caldav.so
+ %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-google.so
+
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-hula*
+ %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-external-editor.so
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-face*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-imap*
+ %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-ipod-sync-evolution.so
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-mail-attachments-import-ics.so
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-startup-wizard*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-exchange-operations.*
@@ -256,6 +269,7 @@ cat %name.lang >> %{name}-%{major_version}.lang
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-new-mail-notify.*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-p*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-s*
+ %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-t*
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-a*
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-b*
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-c*
@@ -263,10 +277,12 @@ cat %name.lang >> %{name}-%{major_version}.lang
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-attachment-reminder.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-bbdb.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-caldav.eplug
+ %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-google.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-hula-account-setup.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-mail-attachments-import-ics.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-startup-wizard.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-exchange*
+ %{_libdir}/evolution/%{major_version}/plugins/org-gnome-external-editor.*
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-face*
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-folder-permissions.xml
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-folder-subscription.xml
@@ -274,8 +290,11 @@ cat %name.lang >> %{name}-%{major_version}.lang
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-gw-account-setup.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-itip-formatter.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-imap*
+ %{_libdir}/evolution/%{major_version}/plugins/org-gnome-ipod-sync-evolution.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-mail-notification*
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-mail-account-disable.eplug
+ %{_libdir}/evolution/%{major_version}/plugins/org-gnome-mail-folder-unsubscribe.eplug
+ %{_libdir}/evolution/%{major_version}/plugins/org-gnome-mail-to-meeting.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-mail-to-task.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-mail-to-task.xml
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-mailing-list-actions.eplug
@@ -291,10 +310,12 @@ cat %name.lang >> %{name}-%{major_version}.lang
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-print-message.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-print-message.xml
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-sa-junk-plugin.eplug
+ %{_libdir}/evolution/%{major_version}/plugins/org-gnome-save-attachments.*
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-save-calendar.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-select-one-source.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-subject-thread.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-subject-thread.eplug
+ %{_libdir}/evolution/%{major_version}/plugins/org-gnome-tnef-attachments.eplug
 %{_datadir}/applications/*
 %{_datadir}/evolution
 %{_datadir}/idl/*
