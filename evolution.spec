@@ -10,7 +10,7 @@
 
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
-Version: 2.21.1
+Version: 2.21.2
 Release: %mkrel 1
 License: 	GPL
 Group:		Networking/Mail
@@ -19,8 +19,6 @@ Source2:	evolution_48.png
 Source3:	evolution_32.png
 Source4:	evolution_16.png
 Patch:		evolution-2.2.3-no-diagnostics.patch
-#gw it doesn't build in 2.21.1 (upstream bug #491386)
-Patch1: evolution-2.21.1-no-mail-remote-plugin.patch
 # (fc) 1.5.94.1-4mdk import welcome mail from indexhtml
 Patch17:	evolution-2.11.3-firstmail.patch
 # (fc) 2.2.3-5mdk enable autocompletion on personal addressbook when creating it (Mdk bug #16427)
@@ -132,13 +130,10 @@ with mono.
 %prep
 %setup -q
 %patch -p1 -b .diagnostics
-%patch1 -p1
 %patch17 -p1 -b .firstmail
 %patch18 -p1 -b .defaultcompletion
 %patch20 -p1 -b .nobugbuddy
 %patch21 -p1 -b .defaultsound
-#patch1
-autoconf
 
 %build
 
