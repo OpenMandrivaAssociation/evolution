@@ -10,7 +10,7 @@
 
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
-Version: 2.21.2
+Version: 2.21.3
 Release: %mkrel 1
 License: 	GPL
 Group:		Networking/Mail
@@ -23,8 +23,6 @@ Patch:		evolution-2.2.3-no-diagnostics.patch
 Patch17:	evolution-2.11.3-firstmail.patch
 # (fc) 2.2.3-5mdk enable autocompletion on personal addressbook when creating it (Mdk bug #16427)
 Patch18:	evolution-2.2.3-defaultcompletion.patch
-# (fc) 2.11.92-3mdv don't show "submit bugreport" in help menu
-Patch20:	evolution-2.11.92-nobugbuddy.patch
 # (fc) 2.11.92-3mdv configure default sound notification (Mdv bug #29414)
 Patch21:	evolution-2.11.92-soundnotification.patch
 URL: 		http://www.gnome.org/projects/evolution/
@@ -132,7 +130,6 @@ with mono.
 %patch -p1 -b .diagnostics
 %patch17 -p1 -b .firstmail
 %patch18 -p1 -b .defaultcompletion
-%patch20 -p1 -b .nobugbuddy
 %patch21 -p1 -b .defaultsound
 
 %build
