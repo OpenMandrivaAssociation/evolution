@@ -10,7 +10,7 @@
 
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
-Version: 2.21.3
+Version: 2.21.4
 Release: %mkrel 1
 License: 	GPL
 Group:		Networking/Mail
