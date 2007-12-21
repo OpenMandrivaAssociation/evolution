@@ -26,6 +26,7 @@ Patch18:	evolution-2.2.3-defaultcompletion.patch
 # (fc) 2.11.92-3mdv configure default sound notification (Mdv bug #29414)
 Patch21:	evolution-2.11.92-soundnotification.patch
 URL: 		http://www.gnome.org/projects/evolution/
+BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 
 # (fc) 0.8-5mdk implicit dependency is not enough
 Requires: evolution-data-server >= %{eds_version_required}
