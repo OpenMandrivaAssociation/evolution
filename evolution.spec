@@ -1,17 +1,17 @@
 %define major_version 2.22
-%define gtkhtml_version_required 3.15.5
+%define gtkhtml_version_required 3.17.5
 %define gnomepilot_version_required 2.0.14
 %define gnomespell_version_required 1.0.5
 %define libsoup_version_required 2.2.2
-%define eds_version_required 2.21.1
+%define eds_version_required 2.21.5
 %define with_mono 1
 %{?_without_mono:	%{expand: %%global with_mono 0}}
 %{?_with_mono:	%{expand: %%global with_mono 1}}
 
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
-Version: 2.21.4
-Release: %mkrel 3
+Version: 2.21.5
+Release: %mkrel 1
 License: 	GPL
 Group:		Networking/Mail
 Source0: 	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
@@ -19,8 +19,6 @@ Source2:	evolution_48.png
 Source3:	evolution_32.png
 Source4:	evolution_16.png
 Patch:		evolution-2.2.3-no-diagnostics.patch
-# fix for bug 36319 (google calender for non-gmail addresses)
-Patch1: evolution-2.21.4-google-calender-non-gmail-addresses.patch
 # (fc) 1.5.94.1-4mdk import welcome mail from indexhtml
 Patch17:	evolution-2.11.3-firstmail.patch
 # (fc) 2.2.3-5mdk enable autocompletion on personal addressbook when creating it (Mdk bug #16427)
@@ -130,7 +128,6 @@ with mono.
 %prep
 %setup -q
 %patch -p1 -b .diagnostics
-%patch1 -p1 -b .gmail
 %patch17 -p1 -b .firstmail
 %patch18 -p1 -b .defaultcompletion
 %patch21 -p1 -b .defaultsound
@@ -262,7 +259,6 @@ cat %name.lang >> %{name}-%{major_version}.lang
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-g*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-itip-formatter.*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-m*
- %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-new-mail-notify.*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-p*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-s*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-t*
@@ -298,7 +294,6 @@ cat %name.lang >> %{name}-%{major_version}.lang
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-mailing-list-actions.xml
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-mark-all-read.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-mark-calendar-offline.eplug
- %{_libdir}/evolution/%{major_version}/plugins/org-gnome-new-mail-notify.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-plugin-manager.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-plugin-manager.xml
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-publish-calendar.eplug
