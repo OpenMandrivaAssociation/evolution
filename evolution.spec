@@ -49,8 +49,8 @@ BuildRequires: gtk-doc
 BuildRequires: intltool
 BuildRequires: krb5-devel 
 BuildRequires: libgnomeui2-devel
-BuildRequires: libgstreamer0.10-devel
-BuildRequires: libgtkhtml-3.14-devel >= %{gtkhtml_version_required}
+BuildRequires: gstreamer0.10-devel
+BuildRequires: gtkhtml-3.14-devel >= %{gtkhtml_version_required}
 BuildRequires: libsoup-devel >= %{libsoup_version_required}
 BuildRequires: nss-devel 
 BuildRequires: openldap-devel 
