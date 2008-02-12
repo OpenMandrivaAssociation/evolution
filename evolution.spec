@@ -41,7 +41,6 @@ Suggests: gnome-audio
 Suggests: spamassassin
 BuildRequires: bison flex
 BuildRequires: dbus-glib-devel
-BuildRequires: libgnomeprintui-devel
 BuildRequires: evolution-data-server-devel >= %{eds_version_required}
 BuildRequires: gnome-pilot-devel >= %{gnomepilot_version_required}
 BuildRequires: gtk+2-devel >= 2.4.0
@@ -78,8 +77,7 @@ Summary:	Libraries and include files for developing Evolution components
 Group:		Development/GNOME and GTK+
 Requires:	%{name} = %{version}-%{release}
 # gw all other devel deps are expressed by pkgconfig() deps
-Requires:  libgtkhtml-3.14-devel >= %{gtkhtml_version_required}
-Requires:  libgnomeprintui-devel
+Requires:  gtkhtml-3.14-devel >= %{gtkhtml_version_required}
 Obsoletes:	libevolution0-devel
 Provides:	libevolution0-devel
 
