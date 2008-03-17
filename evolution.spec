@@ -67,8 +67,7 @@ BuildRequires: gnome-doc-utils
 BuildRequires: scrollkeeper
 BuildRequires: desktop-file-utils
 #gw if we run aclocal
-#BuildRequires: gnome-common
-#BuildRequires: automake1.9
+BuildRequires: gnome-common
 
 %description
 Evolution is the GNOME mailer, calendar, contact manager and
