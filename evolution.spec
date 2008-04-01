@@ -11,7 +11,7 @@
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
 Version: 2.22.0
-Release: %mkrel 3
+Release: %mkrel 4
 License: 	GPL
 Group:		Networking/Mail
 Source0: 	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
@@ -27,8 +27,10 @@ Patch18:	evolution-2.2.3-defaultcompletion.patch
 Patch21:	evolution-2.11.92-soundnotification.patch
 # (fc) 2.22.0-2mdv fix plugin screwing locale (Mdv bug #38901) (GNOME bug #501885)
 Patch22:	evolution-2.22.0-fixlocale.patch
-# (fc) 2.22.0-2mdv fix crash when invalid mimetype is found (GNOME bug #460204) (SVN)
-Patch23:	evolution-2.22.0-fixinvalidmime.patch
+# (fc) 2.22.0-4mdv various fixes from SVN
+Patch23:	evolution-2.22.0-svnfixes.patch
+# (fc) 2.22.0-4mdv set back spamassassin as default spam software (typo in gconf key from upstream)
+Patch24:	evolution-2.22.0-spamassassin.patch
 URL: 		http://www.gnome.org/projects/evolution/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 
@@ -133,7 +135,8 @@ with mono.
 %patch18 -p1 -b .defaultcompletion
 %patch21 -p1 -b .defaultsound
 %patch22 -p1 -b .fixlocale
-%patch23 -p1 -b .fixinvalidmime
+%patch23 -p1 -b .svnfixes
+%patch24 -p1 -b .spamassassin
 
 #needed by patch 22
 autoreconf
