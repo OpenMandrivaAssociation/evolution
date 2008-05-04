@@ -10,8 +10,8 @@
 
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
-Version: 2.22.1
-Release: %mkrel 2
+Version: 2.22.1.1
+Release: %mkrel 1
 License: 	GPL
 Group:		Networking/Mail
 Source0: 	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
@@ -19,9 +19,6 @@ Source2:	evolution_48.png
 Source3:	evolution_32.png
 Source4:	evolution_16.png
 Patch:		evolution-2.2.3-no-diagnostics.patch
-#gw fix adding the Cc: and Bcc: headers in the composer
-# http://bugzilla.gnome.org/show_bug.cgi?id=502913
-Patch1: evolution-r35434-fix-cc-header-in-composer.patch
 # (fc) 1.5.94.1-4mdk import welcome mail from indexhtml
 Patch17:	evolution-2.11.3-firstmail.patch
 # (fc) 2.2.3-5mdk enable autocompletion on personal addressbook when creating it (Mdk bug #16427)
@@ -130,7 +127,6 @@ with mono.
 %prep
 %setup -q
 %patch -p1 -b .diagnostics
-%patch1 -p2 -b .bcc
 %patch17 -p1 -b .firstmail
 %patch18 -p1 -b .defaultcompletion
 %patch21 -p1 -b .defaultsound
