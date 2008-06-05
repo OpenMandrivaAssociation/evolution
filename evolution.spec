@@ -8,9 +8,13 @@
 %{?_without_mono:	%{expand: %%global with_mono 0}}
 %{?_with_mono:	%{expand: %%global with_mono 1}}
 
+
+# disable underlinking check, because upstream has split libraries in such a strange way you can't build with no_undefined
+%define _disable_ld_no_undefined 0
+
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
-Version: 2.22.1.1
+Version: 2.22.2
 Release: %mkrel 1
 License: 	GPL
 Group:		Networking/Mail
@@ -27,6 +31,9 @@ Patch18:	evolution-2.2.3-defaultcompletion.patch
 Patch21:	evolution-2.11.92-soundnotification.patch
 # (fc) 2.22.0-4mdv set back spamassassin as default spam software (typo in gconf key from upstream)
 Patch24:	evolution-2.22.0-spamassassin.patch
+# (gw) 2.22.2-1mdv fix underlinking
+Patch25:	evolution-2.22.2-fix-linking.patch
+
 URL: 		http://www.gnome.org/projects/evolution/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 
@@ -131,6 +138,10 @@ with mono.
 %patch18 -p1 -b .defaultcompletion
 %patch21 -p1 -b .defaultsound
 %patch24 -p1 -b .spamassassin
+%patch25 -p1 -b .fix-linking
+
+#needed by patch25
+autoreconf
 
 %build
 
