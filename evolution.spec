@@ -15,7 +15,7 @@
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
 Version: 2.22.2
-Release: %mkrel 1
+Release: %mkrel 2
 License: 	GPL
 Group:		Networking/Mail
 Source0: 	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
@@ -33,6 +33,8 @@ Patch21:	evolution-2.11.92-soundnotification.patch
 Patch24:	evolution-2.22.0-spamassassin.patch
 # (gw) 2.22.2-1mdv fix underlinking
 Patch25:	evolution-2.22.2-fix-linking.patch
+# (fc) 2.22.2-2mdv various SVN fixes, including CVE-2008-1108 and CVE-2008-1109
+Patch26:	evolution-2.22.2-svnfixes.patch
 
 URL: 		http://www.gnome.org/projects/evolution/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
@@ -139,6 +141,7 @@ with mono.
 %patch21 -p1 -b .defaultsound
 %patch24 -p1 -b .spamassassin
 %patch25 -p1 -b .fix-linking
+%patch26 -p1 -b .svnfixes
 
 #needed by patch25
 autoreconf
