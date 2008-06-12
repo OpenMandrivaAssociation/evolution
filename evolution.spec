@@ -209,19 +209,23 @@ cat %name.lang >> %{name}-%{major_version}.lang
 %define schemas apps-evolution-mail-notification apps-evolution-mail-prompts-checkdefault apps_evolution_addressbook apps_evolution_calendar apps_evolution_shell bogo-junk-plugin evolution-mail apps-evolution-attachment-reminder
 
 
+%if %mdkversion < 200900
 %post
 %{update_scrollkeeper}
 %{update_menus}
 %post_install_gconf_schemas %{schemas}
 %update_icon_cache hicolor
+%endif
 
 %preun
 %preun_uninstall_gconf_schemas %{schemas}
 
+%if %mdkversion < 200900
 %postun
 %{clean_scrollkeeper}
 %{clean_menus}
 %clean_icon_cache hicolor
+%endif
 
 %files -f %{name}-%{major_version}.lang
 %defattr(-, root, root)
