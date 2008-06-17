@@ -140,11 +140,12 @@ with mono.
 %patch18 -p1 -b .defaultcompletion
 %patch21 -p1 -b .defaultsound
 %patch24 -p1 -b .spamassassin
-%patch25 -p1 -b .fix-linking
+#disable for now, until evolution is completely fixed
+#patch25 -p1 -b .fix-linking
 %patch26 -p1 -b .svnfixes
 
 #needed by patch25
-autoreconf
+#autoreconf
 
 %build
 
