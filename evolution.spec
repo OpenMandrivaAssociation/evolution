@@ -35,8 +35,6 @@ Patch21:	evolution-2.11.92-soundnotification.patch
 Patch24:	evolution-2.22.0-spamassassin.patch
 # (gw) 2.22.2-1mdv fix underlinking
 Patch25:	evolution-2.22.2-fix-linking.patch
-# (fc) 2.22.2-2mdv various SVN fixes, including CVE-2008-1108 and CVE-2008-1109
-Patch26:	evolution-2.22.2-svnfixes.patch
 
 URL: 		http://www.gnome.org/projects/evolution/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
@@ -144,14 +142,11 @@ with mono.
 %patch24 -p1 -b .spamassassin
 #disable for now, until evolution is completely fixed
 #patch25 -p1 -b .fix-linking
-%patch26 -p1 -b .svnfixes
 
 #needed by patch25
 #autoreconf
 
 %build
-#gw else libevolution-a11y.la does not build
-%define _disable_ld_no_undefined 1
 %configure2_5x --enable-pilot-conduits=yes \
 --enable-plugins=experimental \
 --with-krb5=%{_prefix} --with-krb5-libs=%{_libdir} --without-krb4 \
