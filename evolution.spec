@@ -14,15 +14,17 @@
 
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
-Version: 2.22.2
-Release: %mkrel 5
-License: 	GPL
+Version: 2.22.3
+Release: %mkrel 1
+License: 	GPLv2+
 Group:		Networking/Mail
 Source0: 	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
 Source2:	evolution_48.png
 Source3:	evolution_32.png
 Source4:	evolution_16.png
 Patch:		evolution-2.2.3-no-diagnostics.patch
+# gw 2.22.3: fix help build: http://bugzilla.gnome.org/show_bug.cgi?id=540918
+Patch1: evolution-2.22.3-fix-help-building.patch
 # (fc) 1.5.94.1-4mdk import welcome mail from indexhtml
 Patch17:	evolution-2.11.3-firstmail.patch
 # (fc) 2.2.3-5mdk enable autocompletion on personal addressbook when creating it (Mdk bug #16427)
@@ -69,7 +71,6 @@ BuildRequires: libnotify-devel >= 0.3.0
 #gw needed by the tnef plugin
 BuildRequires: libytnef-devel
 BuildRequires: gnome-icon-theme
-BuildRequires: perl-XML-Parser
 BuildRequires: gnome-doc-utils
 BuildRequires: scrollkeeper
 BuildRequires: desktop-file-utils
@@ -136,6 +137,7 @@ with mono.
 %prep
 %setup -q
 %patch -p1 -b .diagnostics
+%patch1 -p1
 %patch17 -p1 -b .firstmail
 %patch18 -p1 -b .defaultcompletion
 %patch21 -p1 -b .defaultsound
@@ -148,7 +150,8 @@ with mono.
 #autoreconf
 
 %build
-
+#gw else libevolution-a11y.la does not build
+%define _disable_ld_no_undefined 1
 %configure2_5x --enable-pilot-conduits=yes \
 --enable-plugins=experimental \
 --with-krb5=%{_prefix} --with-krb5-libs=%{_libdir} --without-krb4 \
