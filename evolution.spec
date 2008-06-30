@@ -33,8 +33,6 @@ Patch18:	evolution-2.2.3-defaultcompletion.patch
 Patch21:	evolution-2.11.92-soundnotification.patch
 # (fc) 2.22.0-4mdv set back spamassassin as default spam software (typo in gconf key from upstream)
 Patch24:	evolution-2.22.0-spamassassin.patch
-# (gw) 2.22.2-1mdv fix underlinking
-Patch25:	evolution-2.22.2-fix-linking.patch
 
 URL: 		http://www.gnome.org/projects/evolution/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
@@ -140,11 +138,6 @@ with mono.
 %patch18 -p1 -b .defaultcompletion
 %patch21 -p1 -b .defaultsound
 %patch24 -p1 -b .spamassassin
-#disable for now, until evolution is completely fixed
-#patch25 -p1 -b .fix-linking
-
-#needed by patch25
-#autoreconf
 
 %build
 %configure2_5x --enable-pilot-conduits=yes \
