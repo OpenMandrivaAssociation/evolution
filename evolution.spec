@@ -1,9 +1,9 @@
-%define major_version 2.22
+%define major_version 2.24
 %define gtkhtml_version_required 3.17.5
 %define gnomepilot_version_required 2.0.14
 %define gnomespell_version_required 1.0.5
 %define libsoup_version_required 2.3.0
-%define eds_version_required 2.21.92
+%define eds_version_required 2.23.1
 %define with_mono 1
 %{?_without_mono:	%{expand: %%global with_mono 0}}
 %{?_with_mono:	%{expand: %%global with_mono 1}}
@@ -14,7 +14,7 @@
 
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
-Version: 2.22.3.1
+Version: 2.23.4
 Release: %mkrel 1
 License: 	GPLv2+
 Group:		Networking/Mail
@@ -195,7 +195,7 @@ cat %name.lang >> %{name}-%{major_version}.lang
 %clean
 [ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
 
-%define schemas apps-evolution-mail-notification apps-evolution-mail-prompts-checkdefault apps_evolution_addressbook apps_evolution_calendar apps_evolution_shell bogo-junk-plugin evolution-mail apps-evolution-attachment-reminder
+%define schemas apps-evolution-external-editor apps_evolution_email_custom_header apps-evolution-mail-notification apps-evolution-mail-prompts-checkdefault apps_evolution_addressbook apps_evolution_calendar apps_evolution_shell bogo-junk-plugin evolution-mail apps-evolution-attachment-reminder
 
 
 %if %mdkversion < 200900
@@ -220,6 +220,8 @@ cat %name.lang >> %{name}-%{major_version}.lang
 %defattr(-, root, root)
 %doc AUTHORS COPYING ChangeLog NEWS README
 %{_sysconfdir}/xdg/autostart/*.desktop
+%_sysconfdir/gconf/schemas/apps-evolution-external-editor.schemas
+%_sysconfdir/gconf/schemas/apps_evolution_email_custom_header.schemas
 %_sysconfdir/gconf/schemas/apps-evolution-mail-notification.schemas
 %_sysconfdir/gconf/schemas/apps-evolution-mail-prompts-checkdefault.schemas
 %_sysconfdir/gconf/schemas/apps_evolution_addressbook.schemas
@@ -249,6 +251,7 @@ cat %name.lang >> %{name}-%{major_version}.lang
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-b*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-c*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-d*
+ %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-email-custom-header.so
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-attachment-reminder.so
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-bbdb.*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-caldav.so
@@ -273,6 +276,7 @@ cat %name.lang >> %{name}-%{major_version}.lang
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-b*
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-c*
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-d*
+ %{_libdir}/evolution/%{major_version}/plugins/org-gnome-email-custom-header.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-attachment-reminder.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-bbdb.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-caldav.eplug
@@ -306,8 +310,6 @@ cat %name.lang >> %{name}-%{major_version}.lang
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-publish-calendar.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-publish-calendar.xml
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-prefer-plain.eplug
- %{_libdir}/evolution/%{major_version}/plugins/org-gnome-print-message.eplug
- %{_libdir}/evolution/%{major_version}/plugins/org-gnome-print-message.xml
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-sa-junk-plugin.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-save-attachments.*
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-save-calendar.eplug
