@@ -1,9 +1,9 @@
 %define major_version 2.24
-%define gtkhtml_version_required 3.17.5
+%define gtkhtml_version_required 3.23.5
 %define gnomepilot_version_required 2.0.14
 %define gnomespell_version_required 1.0.5
 %define libsoup_version_required 2.3.0
-%define eds_version_required 2.23.1
+%define eds_version_required 2.23.5
 %define with_mono 1
 %{?_without_mono:	%{expand: %%global with_mono 0}}
 %{?_with_mono:	%{expand: %%global with_mono 1}}
@@ -14,7 +14,7 @@
 
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
-Version: 2.23.4
+Version: 2.23.5
 Release: %mkrel 1
 License: 	GPLv2+
 Group:		Networking/Mail
@@ -195,7 +195,7 @@ cat %name.lang >> %{name}-%{major_version}.lang
 %clean
 [ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
 
-%define schemas apps-evolution-external-editor apps_evolution_email_custom_header apps-evolution-mail-notification apps-evolution-mail-prompts-checkdefault apps_evolution_addressbook apps_evolution_calendar apps_evolution_shell bogo-junk-plugin evolution-mail apps-evolution-attachment-reminder
+%define schemas apps-evolution-external-editor apps_evolution_email_custom_header apps-evolution-mail-notification apps-evolution-mail-prompts-checkdefault apps_evolution_addressbook apps_evolution_calendar apps_evolution_shell bogo-junk-plugin evolution-mail apps-evolution-attachment-reminder apps-evolution-template-placeholders
 
 
 %if %mdkversion < 200900
@@ -224,6 +224,7 @@ cat %name.lang >> %{name}-%{major_version}.lang
 %_sysconfdir/gconf/schemas/apps_evolution_email_custom_header.schemas
 %_sysconfdir/gconf/schemas/apps-evolution-mail-notification.schemas
 %_sysconfdir/gconf/schemas/apps-evolution-mail-prompts-checkdefault.schemas
+%_sysconfdir/gconf/schemas/apps-evolution-template-placeholders.schemas
 %_sysconfdir/gconf/schemas/apps_evolution_addressbook.schemas
 %_sysconfdir/gconf/schemas/apps-evolution-attachment-reminder.schemas
 %_sysconfdir/gconf/schemas/apps_evolution_calendar.schemas
@@ -316,7 +317,9 @@ cat %name.lang >> %{name}-%{major_version}.lang
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-select-one-source.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-subject-thread.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-subject-thread.eplug
+ %{_libdir}/evolution/%{major_version}/plugins/org-gnome-templates.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-tnef-attachments.eplug
+ %{_libdir}/evolution/%{major_version}/plugins/*.glade
 %{_datadir}/applications/*
 %{_datadir}/evolution
 %{_datadir}/idl/*
