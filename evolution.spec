@@ -3,7 +3,7 @@
 %define gnomepilot_version_required 2.0.14
 %define gnomespell_version_required 1.0.5
 %define libsoup_version_required 2.3.0
-%define eds_version_required 2.23.5
+%define eds_version_required 2.23.6
 %define with_mono 1
 %{?_without_mono:	%{expand: %%global with_mono 0}}
 %{?_with_mono:	%{expand: %%global with_mono 1}}
@@ -14,7 +14,7 @@
 
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
-Version: 2.23.5
+Version: 2.23.6
 Release: %mkrel 1
 License: 	GPLv2+
 Group:		Networking/Mail
@@ -259,6 +259,7 @@ cat %name.lang >> %{name}-%{major_version}.lang
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-google.so
 
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-hula*
+ %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-webdav*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-external-editor.so
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-face*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-imap*
@@ -286,6 +287,7 @@ cat %name.lang >> %{name}-%{major_version}.lang
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-mail-attachments-import-ics.eplug
 # %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-mail-remote.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-startup-wizard.eplug
+ %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-webdav.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-exchange*
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-external-editor.*
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-face*
