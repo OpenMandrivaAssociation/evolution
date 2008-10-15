@@ -15,7 +15,7 @@
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
 Version: 2.24.0
-Release: %mkrel 2
+Release: %mkrel 3
 License: 	LGPLv2+
 Group:		Networking/Mail
 Source0: 	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
@@ -33,6 +33,8 @@ Patch21:	evolution-2.11.92-soundnotification.patch
 Patch24:	evolution-2.22.0-spamassassin.patch
 # (fc) 2.24.0-2mdv various SVN fixes
 Patch25:	evolution-2.24.0-svnfixes.patch
+# (fc) 2.24.0-3mdv fix sending mail with Exchange email (Mdv bug #44908) (SVN)
+Patch26:	evolution-2.24.0-fixexchange.patch
 
 URL: 		http://www.gnome.org/projects/evolution/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
@@ -138,6 +140,7 @@ with mono.
 %patch21 -p1 -b .defaultsound
 %patch24 -p1 -b .spamassassin
 %patch25 -p1 -b .svnfixes
+%patch26 -p1 -b .fixexchange
 
 %build
 %configure2_5x --enable-pilot-conduits=yes \
