@@ -31,6 +31,8 @@ Patch18:	evolution-2.2.3-defaultcompletion.patch
 Patch21:	evolution-2.11.92-soundnotification.patch
 # (fc) 2.22.0-4mdv set back spamassassin as default spam software (typo in gconf key from upstream)
 Patch24:	evolution-2.22.0-spamassassin.patch
+# (aw) 2.24.1-1mdv restrict mono dep to sub-package (from upstream #549025)
+Patch25:	evolution-2.24.1-mono.patch
 
 URL: 		http://www.gnome.org/projects/evolution/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
@@ -135,8 +137,11 @@ with mono.
 %patch18 -p1 -b .defaultcompletion
 %patch21 -p1 -b .defaultsound
 %patch24 -p1 -b .spamassassin
+%patch25 -p0 -b .mono
 
 %build
+# needed by patch25
+autoreconf
 %configure2_5x --enable-pilot-conduits=yes \
 --enable-plugins=experimental \
 --with-krb5=%{_prefix} --with-krb5-libs=%{_libdir} --without-krb4 \
