@@ -1,9 +1,9 @@
 %define major_version 2.26
-%define gtkhtml_version_required 3.23.5
+%define gtkhtml_version_required 3.25.3
 %define gnomepilot_version_required 2.0.14
 %define gnomespell_version_required 1.0.5
 %define libsoup_version_required 2.3.0
-%define eds_version_required 2.25.2
+%define eds_version_required 2.25.3
 %define with_mono 1
 %{?_without_mono:	%{expand: %%global with_mono 0}}
 %{?_with_mono:	%{expand: %%global with_mono 1}}
@@ -14,8 +14,8 @@
 
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
-Version: 2.25.2
-Release: %mkrel 2
+Version: 2.25.3.1
+Release: %mkrel 1
 License: 	LGPLv2+
 Group:		Networking/Mail
 Source0: 	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
@@ -23,12 +23,9 @@ Source2:	evolution_48.png
 Source3:	evolution_32.png
 Source4:	evolution_16.png
 Patch:		evolution-2.2.3-no-diagnostics.patch
+Patch1:		evolution-2.25.3.1-format-strings.patch
 # (fc) 1.5.94.1-4mdk import welcome mail from indexhtml
-Patch17:	evolution-2.11.3-firstmail.patch
-# (fc) 2.2.3-5mdk enable autocompletion on personal addressbook when creating it (Mdk bug #16427)
-Patch18:	evolution-2.2.3-defaultcompletion.patch
-# (fc) 2.11.92-3mdv configure default sound notification (Mdv bug #29414)
-Patch21:	evolution-2.11.92-soundnotification.patch
+Patch17:	evolution-2.25.3.1-firstmail.patch
 # (fc) 2.22.0-4mdv set back spamassassin as default spam software (typo in gconf key from upstream)
 Patch24:	evolution-2.22.0-spamassassin.patch
 
@@ -131,9 +128,8 @@ with mono.
 %prep
 %setup -q
 %patch -p1 -b .diagnostics
+%patch1 -p1 -b .format-strings
 %patch17 -p1 -b .firstmail
-%patch18 -p1 -b .defaultcompletion
-%patch21 -p1 -b .defaultsound
 %patch24 -p1 -b .spamassassin
 
 %build
