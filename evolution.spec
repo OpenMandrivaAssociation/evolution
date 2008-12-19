@@ -59,6 +59,7 @@ BuildRequires: nss-devel
 BuildRequires: openldap-devel 
 BuildRequires: hal-devel
 BuildRequires: libnotify-devel >= 0.3.0
+BuildRequires: libgweather-devel
 #gw needed by the tnef plugin
 BuildRequires: libytnef-devel
 BuildRequires: gnome-icon-theme
