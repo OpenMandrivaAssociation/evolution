@@ -1,7 +1,6 @@
 %define major_version 2.26
 %define gtkhtml_version_required 3.25.4
 %define gnomepilot_version_required 2.0.14
-%define gnomespell_version_required 1.0.5
 %define libsoup_version_required 2.3.0
 %define eds_version_required 2.25.92
 %define with_mono 1
@@ -15,7 +14,7 @@
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
 Version: 2.25.92
-Release: %mkrel 1
+Release: %mkrel 2
 License: 	LGPLv2+
 Group:		Networking/Mail
 Source0: 	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
@@ -35,7 +34,6 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 # (fc) 0.8-5mdk implicit dependency is not enough
 Requires: evolution-data-server >= %{eds_version_required}
 Requires: gtkhtml-3.14 >= %{gtkhtml_version_required}
-Requires: gnome-spell >= %{gnomespell_version_required}
 Requires: gnupg
 Requires: scrollkeeper >= 0.3
 Requires: gtk+2.0 >= 2.4.0
