@@ -13,8 +13,8 @@
 
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
-Version: 2.26.0
-Release: %mkrel 1
+Version:	2.26.0
+Release:	%mkrel 2
 License: 	LGPLv2+
 Group:		Networking/Mail
 Source0: 	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
@@ -66,6 +66,8 @@ BuildRequires: scrollkeeper
 BuildRequires: desktop-file-utils
 #gw if we run aclocal
 BuildRequires: gnome-common
+#(eandry) needed for pst files import plugin
+BuildRequires: libpst-devel
 
 %description
 Evolution is the GNOME mailer, calendar, contact manager and
@@ -143,25 +145,25 @@ with mono.
 %make
 
 %install
-[ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
+[ -n "%{buildroot}" -a "%{buildroot}" != / ] && rm -rf %{buildroot}
 
 %makeinstall_std
 
-mkdir -p $RPM_BUILD_ROOT%{_iconsdir}  $RPM_BUILD_ROOT%{_liconsdir}  $RPM_BUILD_ROOT%{_miconsdir}
-cp -f %{SOURCE2} $RPM_BUILD_ROOT%{_liconsdir}/evolution.png
-cp -f %{SOURCE3} $RPM_BUILD_ROOT%{_iconsdir}/evolution.png
-cp -f %{SOURCE4} $RPM_BUILD_ROOT%{_miconsdir}/evolution.png
+mkdir -p %{buildroot}%{_iconsdir}  %{buildroot}%{_liconsdir}  %{buildroot}%{_miconsdir}
+cp -f %{SOURCE2} %{buildroot}%{_liconsdir}/evolution.png
+cp -f %{SOURCE3} %{buildroot}%{_iconsdir}/evolution.png
+cp -f %{SOURCE4} %{buildroot}%{_miconsdir}/evolution.png
 
 desktop-file-install --vendor="" \
   --remove-category="Office" \
   --remove-category="Calendar" \
   --remove-category="ContactManagement" \
   --add-category="Network" \
-  --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/evolution.desktop
+  --dir %{buildroot}%{_datadir}/applications %{buildroot}%{_datadir}/applications/evolution.desktop
 
-mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/xdg/autostart/ 
+mkdir -p %{buildroot}%{_sysconfdir}/xdg/autostart/ 
 
-cat << EOF > $RPM_BUILD_ROOT%{_sysconfdir}/xdg/autostart/evolution-alarm-notify.desktop
+cat << EOF > %{buildroot}%{_sysconfdir}/xdg/autostart/evolution-alarm-notify.desktop
 [Desktop Entry]
 Encoding=UTF-8
 Name=Evolution Alarm Notifier
@@ -175,11 +177,11 @@ Categories=
 EOF
 
 #remove unpackaged files
-rm -rf $RPM_BUILD_ROOT%{_libdir}/gnome-pilot/conduits/*.{a,la} \
- $RPM_BUILD_ROOT%{_libdir}/evolution/%{major_version}/components/*.{a,la} \
- $RPM_BUILD_ROOT%{_libdir}/evolution/%{major_version}/plugins/*.la \
- $RPM_BUILD_ROOT%{_libdir}/evolution/%{major_version}/camel-providers/*.{a,la} \
- $RPM_BUILD_ROOT%{_libdir}/evolution/%{major_version}/conduits/*.la \
+rm -rf %{buildroot}%{_libdir}/gnome-pilot/conduits/*.{a,la} \
+ %{buildroot}%{_libdir}/evolution/%{major_version}/components/*.{a,la} \
+ %{buildroot}%{_libdir}/evolution/%{major_version}/plugins/*.la \
+ %{buildroot}%{_libdir}/evolution/%{major_version}/camel-providers/*.{a,la} \
+ %{buildroot}%{_libdir}/evolution/%{major_version}/conduits/*.la \
  %buildroot/var/lib/
 
 
@@ -188,7 +190,7 @@ rm -rf $RPM_BUILD_ROOT%{_libdir}/gnome-pilot/conduits/*.{a,la} \
 cat %name.lang >> %{name}-%{major_version}.lang
 
 %clean
-[ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
+[ -n "%{buildroot}" -a "%{buildroot}" != / ] && rm -rf %{buildroot}
 
 %define schemas apps-evolution-external-editor apps_evolution_email_custom_header apps-evolution-mail-notification apps-evolution-mail-prompts-checkdefault apps_evolution_addressbook apps_evolution_calendar apps_evolution_shell bogo-junk-plugin evolution-mail apps-evolution-attachment-reminder apps-evolution-template-placeholders
 
