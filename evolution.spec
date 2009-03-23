@@ -134,6 +134,10 @@ with mono.
 %patch24 -p1 -b .spamassassin
 
 %build
+
+#(eandry) needed by libpst 0.6.27
+sed -i s/"define.h>"/"common.h>"/"" plugins/pst-import/pst-importer.c
+
 %configure2_5x --enable-pilot-conduits=yes \
 --enable-plugins=experimental \
 --with-krb5=%{_prefix} --with-krb5-libs=%{_libdir} --without-krb4 \
