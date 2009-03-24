@@ -313,6 +313,7 @@ cat %name.lang >> %{name}-%{major_version}.lang
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-publish-calendar.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-publish-calendar.xml
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-prefer-plain.eplug
+ %{_libdir}/evolution/%{major_version}/plugins/org-gnome-pst-import.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-sa-junk-plugin.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-save-attachments.*
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-save-calendar.eplug
