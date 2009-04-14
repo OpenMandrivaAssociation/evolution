@@ -22,6 +22,7 @@ Source2:	evolution_48.png
 Source3:	evolution_32.png
 Source4:	evolution_16.png
 Patch:		evolution-2.2.3-no-diagnostics.patch
+Patch1:		evolution-2.26.1-fix-format-strings.patch
 Patch2:		evolution-2.26.0-fix-pst-build.patch
 # (fc) 1.5.94.1-4mdk import welcome mail from indexhtml
 Patch17:	evolution-2.25.90-firstmail.patch
@@ -129,6 +130,7 @@ with mono.
 %prep
 %setup -q
 %patch -p1 -b .diagnostics
+%patch1 -p1
 %patch2 -p1
 %patch17 -p1 -b .firstmail
 %patch24 -p1 -b .spamassassin
