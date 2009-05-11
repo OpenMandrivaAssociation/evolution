@@ -1,8 +1,8 @@
-%define major_version 2.26
+%define major_version 2.28
 %define gtkhtml_version_required 3.25.4
 %define gnomepilot_version_required 2.0.14
 %define libsoup_version_required 2.3.0
-%define eds_version_required 2.26.1.1
+%define eds_version_required 2.27.1
 %define with_mono 1
 %{?_without_mono:	%{expand: %%global with_mono 0}}
 %{?_with_mono:	%{expand: %%global with_mono 1}}
@@ -13,7 +13,7 @@
 
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
-Version:	2.26.1.1
+Version:	2.27.1
 Release:	%mkrel 1
 License: 	LGPLv2+
 Group:		Networking/Mail
@@ -184,10 +184,10 @@ EOF
 
 #remove unpackaged files
 rm -rf %{buildroot}%{_libdir}/gnome-pilot/conduits/*.{a,la} \
- %{buildroot}%{_libdir}/evolution/%{major_version}/components/*.{a,la} \
- %{buildroot}%{_libdir}/evolution/%{major_version}/plugins/*.la \
- %{buildroot}%{_libdir}/evolution/%{major_version}/camel-providers/*.{a,la} \
- %{buildroot}%{_libdir}/evolution/%{major_version}/conduits/*.la \
+ %{buildroot}%{_libdir}/evolution/*/components/*.{a,la} \
+ %{buildroot}%{_libdir}/evolution/*/plugins/*.la \
+ %{buildroot}%{_libdir}/evolution/*/camel-providers/*.{a,la} \
+ %{buildroot}%{_libdir}/evolution/*/conduits/*.la \
  %buildroot/var/lib/
 
 
@@ -267,7 +267,6 @@ cat %name.lang >> %{name}-%{major_version}.lang
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-face*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-imap*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-ipod-sync-evolution.so
- %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-mail-attachments-import-ics.so
 # %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-mail-remote.so
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-startup-wizard*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-exchange-operations.*
@@ -287,7 +286,6 @@ cat %name.lang >> %{name}-%{major_version}.lang
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-caldav.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-google.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-hula-account-setup.eplug
- %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-mail-attachments-import-ics.eplug
 # %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-mail-remote.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-startup-wizard.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-webdav.eplug
@@ -304,7 +302,6 @@ cat %name.lang >> %{name}-%{major_version}.lang
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-mail-notification*
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-mail-account-disable.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-mail-folder-unsubscribe.eplug
- %{_libdir}/evolution/%{major_version}/plugins/org-gnome-mail-to-meeting.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-mail-to-task.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-mail-to-task.xml
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-mailing-list-actions.eplug
@@ -317,7 +314,6 @@ cat %name.lang >> %{name}-%{major_version}.lang
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-prefer-plain.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-pst-import.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-sa-junk-plugin.eplug
- %{_libdir}/evolution/%{major_version}/plugins/org-gnome-save-attachments.*
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-save-calendar.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-select-one-source.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-subject-thread.eplug
