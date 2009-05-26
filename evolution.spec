@@ -2,7 +2,7 @@
 %define gtkhtml_version_required 3.25.4
 %define gnomepilot_version_required 2.0.14
 %define libsoup_version_required 2.3.0
-%define eds_version_required 2.27.1
+%define eds_version_required 2.27.2
 %define with_mono 1
 %{?_without_mono:	%{expand: %%global with_mono 0}}
 %{?_with_mono:	%{expand: %%global with_mono 1}}
@@ -13,7 +13,7 @@
 
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
-Version:	2.27.1
+Version:	2.27.2
 Release:	%mkrel 1
 License: 	LGPLv2+
 Group:		Networking/Mail
@@ -22,10 +22,10 @@ Source2:	evolution_48.png
 Source3:	evolution_32.png
 Source4:	evolution_16.png
 Patch:		evolution-2.2.3-no-diagnostics.patch
-Patch1:		evolution-2.26.1-fix-format-strings.patch
+Patch1:		evolution-2.27.2-fix-format-strings.patch
 Patch2:		evolution-2.26.0-fix-pst-build.patch
 # (fc) 1.5.94.1-4mdk import welcome mail from indexhtml
-Patch17:	evolution-2.25.90-firstmail.patch
+Patch17:	evolution-2.27.2-firstmail.patch
 # (fc) 2.22.0-4mdv set back spamassassin as default spam software (typo in gconf key from upstream)
 Patch24:	evolution-2.22.0-spamassassin.patch
 
@@ -130,7 +130,7 @@ with mono.
 %prep
 %setup -q
 %patch -p1 -b .diagnostics
-%patch1 -p1
+%patch1 -p1 -b .format-strings
 %patch2 -p1
 %patch17 -p1 -b .firstmail
 %patch24 -p1 -b .spamassassin
@@ -148,7 +148,8 @@ sed -i s/"define.h>"/"common.h>"/"" plugins/pst-import/pst-importer.c
 --enable-mono=yes
 %endif
 
-%make
+#gw parallel make broken in 2.27.2
+make
 
 %install
 [ -n "%{buildroot}" -a "%{buildroot}" != / ] && rm -rf %{buildroot}
@@ -248,7 +249,6 @@ cat %name.lang >> %{name}-%{major_version}.lang
 %{_libdir}/evolution/%{major_version}/evolution-backup
 %{_libdir}/evolution/%{major_version}/killev
 %dir %{_libdir}/evolution/%{major_version}/plugins
- %{_libdir}/evolution/%{major_version}/plugins/attachment-reminder.glade
  %{_libdir}/evolution/%{major_version}/plugins/libmail-account-disable.*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-addressbook-file.*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-audio-inline.*
@@ -276,6 +276,7 @@ cat %name.lang >> %{name}-%{major_version}.lang
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-p*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-s*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-t*
+%{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-v*
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-a*
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-b*
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-c*
@@ -317,9 +318,9 @@ cat %name.lang >> %{name}-%{major_version}.lang
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-save-calendar.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-select-one-source.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-subject-thread.eplug
- %{_libdir}/evolution/%{major_version}/plugins/org-gnome-subject-thread.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-templates.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-tnef-attachments.eplug
+ %{_libdir}/evolution/%{major_version}/plugins/org-gnome-vcard-inline.eplug
  %{_libdir}/evolution/%{major_version}/plugins/*.glade
 %{_datadir}/applications/*
 %{_datadir}/evolution
