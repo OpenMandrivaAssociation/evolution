@@ -2,7 +2,7 @@
 %define gtkhtml_version_required 3.25.4
 %define gnomepilot_version_required 2.0.14
 %define libsoup_version_required 2.3.0
-%define eds_version_required 2.27.2
+%define eds_version_required 2.27.3
 %define with_mono 1
 %{?_without_mono:	%{expand: %%global with_mono 0}}
 %{?_with_mono:	%{expand: %%global with_mono 1}}
