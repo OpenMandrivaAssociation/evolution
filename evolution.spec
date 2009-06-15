@@ -13,7 +13,7 @@
 
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
-Version:	2.27.2
+Version:	2.27.3
 Release:	%mkrel 1
 License: 	LGPLv2+
 Group:		Networking/Mail
@@ -22,10 +22,10 @@ Source2:	evolution_48.png
 Source3:	evolution_32.png
 Source4:	evolution_16.png
 Patch:		evolution-2.2.3-no-diagnostics.patch
-Patch1:		evolution-2.27.2-fix-format-strings.patch
-Patch2:		evolution-2.26.0-fix-pst-build.patch
+Patch2:		evolution-2.27.2-fix-pst-build.patch
+Patch3:		evolution-2.27.3-fix-mono-build.patch
 # (fc) 1.5.94.1-4mdk import welcome mail from indexhtml
-Patch17:	evolution-2.27.2-firstmail.patch
+Patch17:	evolution-2.27.3-firstmail.patch
 # (fc) 2.22.0-4mdv set back spamassassin as default spam software (typo in gconf key from upstream)
 Patch24:	evolution-2.22.0-spamassassin.patch
 
@@ -130,8 +130,8 @@ with mono.
 %prep
 %setup -q
 %patch -p1 -b .diagnostics
-%patch1 -p1 -b .format-strings
 %patch2 -p1
+%patch3 -p1
 %patch17 -p1 -b .firstmail
 %patch24 -p1 -b .spamassassin
 
