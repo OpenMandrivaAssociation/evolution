@@ -144,6 +144,7 @@ sed -i s/"define.h>"/"common.h>"/"" plugins/pst-import/pst-importer.c
 --enable-plugins=experimental \
 --with-krb5=%{_prefix} --with-krb5-libs=%{_libdir} --without-krb4 \
 --with-openldap=yes --with-static-ldap=no --with-sub-version="-%{release}" --enable-default_binary \
+--disable-nm \
 %if %with_mono
 --enable-mono=yes
 %endif
