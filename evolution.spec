@@ -1,5 +1,5 @@
 %define major_version 2.28
-%define gtkhtml_version_required 3.25.4
+%define gtkhtml_version_required 3.27.90
 %define gnomepilot_version_required 2.0.14
 %define libsoup_version_required 2.3.0
 %define eds_version_required %version
@@ -13,8 +13,8 @@
 
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
-Version:	2.27.5
-Release:	%mkrel 2
+Version:	2.27.90
+Release:	%mkrel 1
 License: 	LGPLv2+
 Group:		Networking/Mail
 Source0: 	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
