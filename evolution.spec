@@ -14,7 +14,7 @@
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
 Version:	2.28.0
-Release:	%mkrel 1
+Release:	%mkrel 2
 License: 	LGPLv2+
 Group:		Networking/Mail
 Source0: 	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
@@ -186,6 +186,8 @@ rm -rf %{buildroot}%{_libdir}/gnome-pilot/conduits/*.{a,la} \
  %{buildroot}%{_libdir}/evolution/*/conduits/*.la \
  %buildroot/var/lib/
 
+# do not package obsolete mime-info files, evolution doesn't import them on commandline (Mdv bug #53984)
+rm -fr %[buildroot}/%{_datadir}/mime-info
 
 %{find_lang} %{name}-%{major_version} --with-gnome
 %{find_lang} %{name} --with-gnome
@@ -320,7 +322,6 @@ cat %name.lang >> %{name}-%{major_version}.lang
 %{_datadir}/applications/*
 %{_datadir}/evolution
 %{_datadir}/idl/*
-%{_datadir}/mime-info/*
 %_datadir/icons/hicolor/*/apps/*
 %{_iconsdir}/*.png
 %{_liconsdir}/*.png
