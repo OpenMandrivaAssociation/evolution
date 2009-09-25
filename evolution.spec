@@ -190,7 +190,7 @@ rm -rf %{buildroot}%{_libdir}/gnome-pilot/conduits/*.{a,la} \
  %buildroot/var/lib/
 
 # do not package obsolete mime-info files, evolution doesn't import them on commandline (Mdv bug #53984)
-rm -fr %[buildroot}/%{_datadir}/mime-info
+rm -fr %{buildroot}/%{_datadir}/mime-info
 
 %{find_lang} %{name}-%{major_version} --with-gnome
 %{find_lang} %{name} --with-gnome
