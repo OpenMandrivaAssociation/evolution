@@ -7,6 +7,9 @@
 %{?_without_mono:	%{expand: %%global with_mono 0}}
 %{?_with_mono:	%{expand: %%global with_mono 1}}
 
+%ifarch %arm %mips
+%define with_mono 0
+%endif
 
 # disable underlinking check, because upstream has split libraries in such a strange way you can't build with no_undefined
 %define _disable_ld_no_undefined 0
@@ -14,7 +17,7 @@
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
 Version:	2.28.0
-Release:	%mkrel 2
+Release:	%mkrel 3
 License: 	LGPLv2+
 Group:		Networking/Mail
 Source0: 	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
