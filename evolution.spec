@@ -1,8 +1,8 @@
-%define major_version 2.28
-%define gtkhtml_version_required 3.27.90
+%define major_version 2.30
+%define gtkhtml_version_required 3.29.2
 %define gnomepilot_version_required 2.0.14
 %define libsoup_version_required 2.3.0
-%define eds_version_required %version
+%define eds_version_required 2.29.3
 %define with_mono 1
 %{?_without_mono:	%{expand: %%global with_mono 0}}
 %{?_with_mono:	%{expand: %%global with_mono 1}}
@@ -16,7 +16,7 @@
 
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
-Version:	2.28.1
+Version:	2.29.3.2
 Release:	%mkrel 1
 License: 	LGPLv2+
 Group:		Networking/Mail
@@ -48,6 +48,7 @@ BuildRequires: dbus-glib-devel
 BuildRequires: evolution-data-server-devel >= %{eds_version_required}
 BuildRequires: gnome-pilot-devel >= %{gnomepilot_version_required}
 BuildRequires: gtk+2-devel >= 2.4.0
+BuildRequires: gtkimageview-devel
 BuildRequires: gtk-doc
 BuildRequires: intltool
 BuildRequires: krb5-devel 
@@ -132,7 +133,7 @@ with mono.
 %prep
 %setup -q
 %patch -p1 -b .diagnostics
-%patch17 -p1 -b .firstmail
+#%patch17 -p1 -b .firstmail
 %patch24 -p1 -b .spamassassin
 
 %build
@@ -199,7 +200,7 @@ cat %name.lang >> %{name}-%{major_version}.lang
 %clean
 [ -n "%{buildroot}" -a "%{buildroot}" != / ] && rm -rf %{buildroot}
 
-%define schemas apps-evolution-external-editor apps_evolution_email_custom_header apps-evolution-mail-notification apps-evolution-mail-prompts-checkdefault apps_evolution_addressbook apps_evolution_calendar apps_evolution_shell bogo-junk-plugin evolution-mail apps-evolution-attachment-reminder apps-evolution-template-placeholders
+%define schemas apps_evolution_eplugin_face apps-evolution-external-editor apps_evolution_email_custom_header apps-evolution-mail-notification apps-evolution-mail-prompts-checkdefault apps_evolution_addressbook apps_evolution_calendar apps_evolution_shell bogo-junk-plugin evolution-mail apps-evolution-attachment-reminder apps-evolution-template-placeholders
 
 
 %if %mdkversion < 200900
@@ -230,26 +231,27 @@ cat %name.lang >> %{name}-%{major_version}.lang
 %_sysconfdir/gconf/schemas/apps-evolution-mail-prompts-checkdefault.schemas
 %_sysconfdir/gconf/schemas/apps-evolution-template-placeholders.schemas
 %_sysconfdir/gconf/schemas/apps_evolution_addressbook.schemas
+%_sysconfdir/gconf/schemas/apps_evolution_eplugin_face.schemas
 %_sysconfdir/gconf/schemas/apps-evolution-attachment-reminder.schemas
 %_sysconfdir/gconf/schemas/apps_evolution_calendar.schemas
 %_sysconfdir/gconf/schemas/apps_evolution_shell.schemas
 %_sysconfdir/gconf/schemas/bogo-junk-plugin.schemas
 %_sysconfdir/gconf/schemas/evolution-mail.schemas
 %{_bindir}/*
-%{_libdir}/bonobo/servers/*
 %dir %{_libdir}/evolution
 %dir %{_libdir}/evolution/%{major_version}
-%dir %{_libdir}/evolution/%{major_version}/components
 %{_libdir}/evolution/%{major_version}/csv2vcard
 %{_libdir}/evolution/%{major_version}/evolution-addressbook-clean
 %{_libdir}/evolution/%{major_version}/evolution-addressbook-export
-%{_libdir}/evolution/%{major_version}/components/*.so
 %{_libdir}/evolution/%{major_version}/*.so.0*
-%{_libdir}/evolution/%{major_version}/evolution-alarm-notify
 %{_libdir}/evolution/%{major_version}/evolution-backup
 %{_libdir}/evolution/%{major_version}/killev
+%dir %{_libdir}/evolution/%{major_version}/modules/
+%{_libdir}/evolution/%{major_version}/modules/libevolution-module-addressbook.*
+%{_libdir}/evolution/%{major_version}/modules/libevolution-module-calendar.*
+%{_libdir}/evolution/%{major_version}/modules/libevolution-module-mail.*
+%{_libdir}/evolution/%{major_version}/modules/libevolution-module-plugin-lib.*
 %dir %{_libdir}/evolution/%{major_version}/plugins
- %{_libdir}/evolution/%{major_version}/plugins/libmail-account-disable.*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-addressbook-file.*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-audio-inline.*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-b*
@@ -265,11 +267,10 @@ cat %name.lang >> %{name}-%{major_version}.lang
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-webdav*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-external-editor.so
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-face*
+ %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-image-inline.so
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-imap*
- %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-ipod-sync-evolution.so
 # %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-mail-remote.so
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-startup-wizard*
- %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-exchange-operations.*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-g*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-itip-formatter.*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-m*
@@ -290,41 +291,28 @@ cat %name.lang >> %{name}-%{major_version}.lang
 # %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-mail-remote.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-startup-wizard.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-webdav.eplug
- %{_libdir}/evolution/%{major_version}/plugins/org-gnome-exchange*
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-external-editor.*
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-face*
- %{_libdir}/evolution/%{major_version}/plugins/org-gnome-folder-permissions.xml
- %{_libdir}/evolution/%{major_version}/plugins/org-gnome-folder-subscription.xml
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-groupwise-features.eplug
- %{_libdir}/evolution/%{major_version}/plugins/org-gnome-gw-account-setup.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-itip-formatter.eplug
+ %{_libdir}/evolution/%{major_version}/plugins/org-gnome-image-inline.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-imap*
- %{_libdir}/evolution/%{major_version}/plugins/org-gnome-ipod-sync-evolution.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-mail-notification*
- %{_libdir}/evolution/%{major_version}/plugins/org-gnome-mail-account-disable.eplug
- %{_libdir}/evolution/%{major_version}/plugins/org-gnome-mail-folder-unsubscribe.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-mail-to-task.eplug
- %{_libdir}/evolution/%{major_version}/plugins/org-gnome-mail-to-task.xml
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-mailing-list-actions.eplug
- %{_libdir}/evolution/%{major_version}/plugins/org-gnome-mailing-list-actions.xml
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-mark-all-read.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-plugin-manager.eplug
- %{_libdir}/evolution/%{major_version}/plugins/org-gnome-plugin-manager.xml
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-publish-calendar.eplug
- %{_libdir}/evolution/%{major_version}/plugins/org-gnome-publish-calendar.xml
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-prefer-plain.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-pst-import.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-sa-junk-plugin.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-save-calendar.eplug
- %{_libdir}/evolution/%{major_version}/plugins/org-gnome-select-one-source.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-subject-thread.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-templates.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-tnef-attachments.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-vcard-inline.eplug
- %{_libdir}/evolution/%{major_version}/plugins/*.glade
 %{_datadir}/applications/*
 %{_datadir}/evolution
-%{_datadir}/idl/*
 %_datadir/icons/hicolor/*/apps/*
 %{_iconsdir}/*.png
 %{_liconsdir}/*.png
@@ -337,11 +325,12 @@ cat %name.lang >> %{name}-%{major_version}.lang
 %{_libdir}/pkgconfig/*
 %{_libdir}/evolution/%{major_version}/*.so
 %{_libdir}/evolution/%{major_version}/*.la
+%_datadir/gtk-doc/html/*
 
 %if %with_mono
 %files mono
 %defattr(-, root, root)
-%{_libdir}/evolution/%{major_version}/plugins/*mono*
+%{_libdir}/evolution/%{major_version}/modules/*mono*
 %endif
 
 %files pilot
