@@ -63,6 +63,7 @@ BuildRequires: libnotify-devel >= 0.3.0
 BuildRequires: libgweather-devel
 BuildRequires: gnome-desktop-devel >= 2.26.0
 BuildRequires: libcanberra-devel
+BuildRequires: unique-devel
 #gw needed by the tnef plugin
 BuildRequires: libytnef-devel
 BuildRequires: gnome-icon-theme
