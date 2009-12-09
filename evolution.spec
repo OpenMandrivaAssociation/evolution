@@ -65,6 +65,7 @@ BuildRequires: gnome-desktop-devel >= 2.26.0
 BuildRequires: libcanberra-devel
 BuildRequires: unique-devel
 BuildRequires: libchamplain-devel
+BuildRequires: libgeoclue-devel
 #gw needed by the tnef plugin
 BuildRequires: libytnef-devel
 BuildRequires: gnome-icon-theme
