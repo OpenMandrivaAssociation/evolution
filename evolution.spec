@@ -62,6 +62,7 @@ BuildRequires: hal-devel
 BuildRequires: libnotify-devel >= 0.3.0
 BuildRequires: libgweather-devel
 BuildRequires: gnome-desktop-devel >= 2.26.0
+BuildRequires: libcanberra-devel
 #gw needed by the tnef plugin
 BuildRequires: libytnef-devel
 BuildRequires: gnome-icon-theme
@@ -140,7 +141,7 @@ with mono.
 
 %configure2_5x --enable-pilot-conduits=yes \
 --enable-plugins=experimental \
---with-krb5=%{_prefix} --with-krb5-libs=%{_libdir} --without-krb4 \
+--with-krb5=%{_prefix} --with-krb5-libs=%{_libdir} \
 --with-openldap=yes --with-static-ldap=no --with-sub-version="-%{release}" --enable-default_binary \
 --disable-nm \
 %if %with_mono
