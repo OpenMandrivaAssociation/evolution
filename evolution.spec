@@ -1,8 +1,8 @@
 %define major_version 2.30
-%define gtkhtml_version_required 3.29.2
+%define gtkhtml_version_required 3.29.5
 %define gnomepilot_version_required 2.0.14
 %define libsoup_version_required 2.3.0
-%define eds_version_required 2.29.3
+%define eds_version_required %version
 %define with_mono 1
 %{?_without_mono:	%{expand: %%global with_mono 0}}
 %{?_with_mono:	%{expand: %%global with_mono 1}}
@@ -16,7 +16,7 @@
 
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
-Version:	2.29.4
+Version:	2.29.5
 Release:	%mkrel 1
 License: 	LGPLv2+
 Group:		Networking/Mail
@@ -145,7 +145,7 @@ with mono.
 %configure2_5x --enable-pilot-conduits=yes \
 --enable-plugins=experimental \
 --with-krb5=%{_prefix} --with-krb5-libs=%{_libdir} \
---with-openldap=yes --with-static-ldap=no --with-sub-version="-%{release}" --enable-default_binary \
+--with-openldap=yes --with-static-ldap=no --with-sub-version="-%{release}"  \
 --disable-nm \
 %if %with_mono
 --enable-mono=yes
