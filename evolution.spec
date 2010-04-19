@@ -41,7 +41,6 @@ Requires: scrollkeeper >= 0.3
 Requires: gtk+2.0 >= 2.4.0
 Requires: indexhtml >= 10.1
 Suggests: gstreamer0.10-plugins-good
-Suggests: gnome-audio
 Suggests: spamassassin
 BuildRequires: bison flex
 BuildRequires: dbus-glib-devel
