@@ -2,7 +2,7 @@
 %define gtkhtml_version_required 3.29.6
 %define gnomepilot_version_required 2.0.14
 %define libsoup_version_required 2.3.0
-%define eds_version_required 2.30.0
+%define eds_version_required %version
 %define with_mono 1
 %{?_without_mono:	%{expand: %%global with_mono 0}}
 %{?_with_mono:	%{expand: %%global with_mono 1}}
@@ -16,8 +16,8 @@
 
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
-Version:	2.30.0.1
-Release:	%mkrel 2
+Version:	2.30.1
+Release:	%mkrel 1
 License: 	LGPLv2+
 Group:		Networking/Mail
 Source0: 	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
@@ -25,6 +25,7 @@ Source2:	evolution_48.png
 Source3:	evolution_32.png
 Source4:	evolution_16.png
 Patch:		evolution-2.2.3-no-diagnostics.patch
+Patch1:		evolution-fix-version-and-eds-dep.patch
 # (fc) 1.5.94.1-4mdk import welcome mail from indexhtml
 Patch17:	evolution-2.27.3-firstmail.patch
 # (fc) 2.22.0-4mdv set back spamassassin as default spam software (typo in gconf key from upstream)
@@ -136,8 +137,11 @@ with mono.
 %prep
 %setup -q
 %patch -p1 -b .diagnostics
+%patch1 -p1
 #%patch17 -p1 -b .firstmail
 %patch24 -p1 -b .spamassassin
+#gw patch1:
+autoreconf -fi
 
 %build
 
