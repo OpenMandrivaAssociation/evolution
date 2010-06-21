@@ -1,8 +1,8 @@
 %define major_version 2.30
 %define gtkhtml_version_required 3.29.6
 %define gnomepilot_version_required 2.0.14
-%define libsoup_version_required 2.3.0
-%define eds_version_required 2.30.1
+%define libsoup_version_required 2.4.0
+%define eds_version_required %{version}
 %define with_mono 1
 %{?_without_mono:	%{expand: %%global with_mono 0}}
 %{?_with_mono:	%{expand: %%global with_mono 1}}
@@ -16,8 +16,8 @@
 
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
-Version:	2.30.1.2
-Release:	%mkrel 2
+Version:	2.30.2
+Release:	%mkrel 1
 License: 	LGPLv2+
 Group:		Networking/Mail
 Source0: 	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
@@ -29,8 +29,8 @@ Patch:		evolution-2.2.3-no-diagnostics.patch
 Patch17:	evolution-2.27.3-firstmail.patch
 # (fc) 2.22.0-4mdv set back spamassassin as default spam software (typo in gconf key from upstream)
 Patch24:	evolution-2.22.0-spamassassin.patch
-# (fc) 2.30.1.2-2mdv various bug fixes from GIT
-Patch25:	evolution-2.30.1.2-gitfixes.patch
+# (fc) 2.30.2-1mdv fix contact list usage (GNOME bug #619347) (GIT)
+Patch25:	evolution-2.30.2-contact-list-fix.patch
 
 URL: 		http://www.gnome.org/projects/evolution/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
@@ -140,10 +140,7 @@ with mono.
 %patch -p1 -b .diagnostics
 #%patch17 -p1 -b .firstmail
 %patch24 -p1 -b .spamassassin
-%patch25 -p1 -b .gitfixes
-
-#needed by patch25
-autoreconf
+%patch25 -p1 -b .contact-list-fix
 
 %build
 
