@@ -181,7 +181,7 @@ Encoding=UTF-8
 Name=Evolution Alarm Notifier
 Comment=Evolution Alarm Notifier
 Icon=stock_alarm
-Exec=%{_bindir}/evolution-alarm-notify
+Exec=%{_libdir}/evolution/%{major_version}/evolution-alarm-notify
 Terminal=false
 Type=Application
 OnlyShowIn=GNOME;
@@ -251,6 +251,7 @@ cat %name.lang >> %{name}-%{major_version}.lang
 %{_libdir}/evolution/%{major_version}/evolution-addressbook-export
 %{_libdir}/evolution/%{major_version}/*.so.0*
 %{_libdir}/evolution/%{major_version}/evolution-backup
+%{_libdir}/evolution/%{major_version}/evolution-alarm-notify
 %{_libdir}/evolution/%{major_version}/killev
 %dir %{_libdir}/evolution/%{major_version}/modules/
 %{_libdir}/evolution/%{major_version}/modules/libevolution-module-addressbook.*
