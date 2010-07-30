@@ -1,6 +1,5 @@
-%define major_version 2.30
-%define gtkhtml_version_required 3.29.6
-%define gnomepilot_version_required 2.0.14
+%define major_version 3.0
+%define gtkhtml_version_required 3.31.2
 %define libsoup_version_required 2.4.0
 %define eds_version_required %{version}
 %define with_mono 1
@@ -16,7 +15,7 @@
 
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
-Version:	2.30.2
+Version:	2.31.5
 Release:	%mkrel 1
 License: 	LGPLv2+
 Group:		Networking/Mail
@@ -29,8 +28,6 @@ Patch:		evolution-2.2.3-no-diagnostics.patch
 Patch17:	evolution-2.27.3-firstmail.patch
 # (fc) 2.22.0-4mdv set back spamassassin as default spam software (typo in gconf key from upstream)
 Patch24:	evolution-2.22.0-spamassassin.patch
-# (fc) 2.30.2-1mdv fix contact list usage (GNOME bug #619347) (GIT)
-Patch25:	evolution-2.30.2-contact-list-fix.patch
 
 URL: 		http://www.gnome.org/projects/evolution/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
@@ -47,7 +44,6 @@ Suggests: spamassassin
 BuildRequires: bison flex
 BuildRequires: dbus-glib-devel
 BuildRequires: evolution-data-server-devel >= %{eds_version_required}
-BuildRequires: gnome-pilot-devel >= %{gnomepilot_version_required}
 BuildRequires: gtk+2-devel >= 2.4.0
 BuildRequires: gtkimageview-devel
 BuildRequires: gtk-doc
@@ -58,13 +54,13 @@ BuildRequires: gstreamer0.10-devel
 BuildRequires: gtkhtml-3.14-devel >= %{gtkhtml_version_required}
 BuildRequires: libsoup-devel >= %{libsoup_version_required}
 BuildRequires: nss-devel 
+BuildRequires: libgdata-devel >= 0.4.0
 BuildRequires: openldap-devel 
-BuildRequires: hal-devel
 BuildRequires: libnotify-devel >= 0.3.0
 BuildRequires: libgweather-devel
-BuildRequires: gnome-desktop-devel >= 2.26.0
+BuildRequires: libgnome-desktop-2-devel >= 2.26.0
 BuildRequires: libcanberra-devel
-BuildRequires: unique-devel
+BuildRequires: unique-devel < 2
 BuildRequires: libchamplain-devel
 BuildRequires: libgeoclue-devel
 #gw needed by the tnef plugin
@@ -102,21 +98,6 @@ personal information-management tool.
 This package contains the files necessary to develop applications
 using Evolution's libraries.
 
-%package pilot
-Summary:	Evolution conduits for gnome-pilot
-Group:		Communications
-Requires:	%{name} = %{version}-%{release}
-Requires:   gnome-pilot >= %{gnomepilot_version_required}
-
-%description pilot
-Evolution is the GNOME mailer, calendar, contact manager and
-communications tool.  The tools which make up Evolution will
-be tightly integrated with one another and act as a seamless
-personal information-management tool.
-
-This package contains conduits needed by gnome-pilot to 
-synchronize your Palm with Evolution
-
 %if %with_mono
 %package mono
 Summary: Mono plugin loader for Evolution
@@ -140,11 +121,10 @@ with mono.
 %patch -p1 -b .diagnostics
 #%patch17 -p1 -b .firstmail
 %patch24 -p1 -b .spamassassin
-%patch25 -p1 -b .contact-list-fix
 
 %build
 
-%configure2_5x --enable-pilot-conduits=yes \
+%configure2_5x \
 --enable-plugins=experimental \
 --with-krb5=%{_prefix} --with-krb5-libs=%{_libdir} \
 --with-openldap=yes --with-static-ldap=no --with-sub-version="-%{release}"  \
@@ -189,8 +169,7 @@ Categories=
 EOF
 
 #remove unpackaged files
-rm -rf %{buildroot}%{_libdir}/gnome-pilot/conduits/*.{a,la} \
- %{buildroot}%{_libdir}/evolution/*/components/*.{a,la} \
+rm -rf %{buildroot}%{_libdir}/evolution/*/components/*.{a,la} \
  %{buildroot}%{_libdir}/evolution/*/plugins/*.la \
  %{buildroot}%{_libdir}/evolution/*/camel-providers/*.{a,la} \
  %{buildroot}%{_libdir}/evolution/*/conduits/*.la \
@@ -249,6 +228,7 @@ cat %name.lang >> %{name}-%{major_version}.lang
 %{_libdir}/evolution/%{major_version}/csv2vcard
 %{_libdir}/evolution/%{major_version}/evolution-addressbook-clean
 %{_libdir}/evolution/%{major_version}/evolution-addressbook-export
+%{_libdir}/evolution/%{major_version}/evolution-alarm-notify
 %{_libdir}/evolution/%{major_version}/*.so.0*
 %{_libdir}/evolution/%{major_version}/evolution-backup
 %{_libdir}/evolution/%{major_version}/evolution-alarm-notify
@@ -257,7 +237,9 @@ cat %name.lang >> %{name}-%{major_version}.lang
 %{_libdir}/evolution/%{major_version}/modules/libevolution-module-addressbook.*
 %{_libdir}/evolution/%{major_version}/modules/libevolution-module-calendar.*
 %{_libdir}/evolution/%{major_version}/modules/libevolution-module-mail.*
+%{_libdir}/evolution/%{major_version}/modules/libevolution-module-mailto-handler.*
 %{_libdir}/evolution/%{major_version}/modules/libevolution-module-plugin-lib.*
+%{_libdir}/evolution/%{major_version}/modules/libevolution-module-startup-wizard.*
 %dir %{_libdir}/evolution/%{major_version}/plugins
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-addressbook-file.*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-audio-inline.*
@@ -270,14 +252,12 @@ cat %name.lang >> %{name}-%{major_version}.lang
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-caldav.so
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-google.so
 
- %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-hula*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-webdav*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-external-editor.so
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-face*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-image-inline.so
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-imap*
 # %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-mail-remote.so
- %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-evolution-startup-wizard*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-g*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-itip-formatter.*
  %{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-m*
@@ -294,9 +274,7 @@ cat %name.lang >> %{name}-%{major_version}.lang
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-bbdb.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-caldav.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-google.eplug
- %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-hula-account-setup.eplug
 # %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-mail-remote.eplug
- %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-startup-wizard.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-evolution-webdav.eplug
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-external-editor.*
  %{_libdir}/evolution/%{major_version}/plugins/org-gnome-face*
@@ -339,9 +317,3 @@ cat %name.lang >> %{name}-%{major_version}.lang
 %defattr(-, root, root)
 %{_libdir}/evolution/%{major_version}/modules/*mono*
 %endif
-
-%files pilot
-%defattr(-, root, root)
-%dir %{_libdir}/evolution/%{major_version}/conduits
-%{_libdir}/evolution/%{major_version}/conduits/*.so
-%{_datadir}/gnome-pilot/conduits/*
