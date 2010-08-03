@@ -10,9 +10,6 @@
 %define with_mono 0
 %endif
 
-# disable underlinking check, because upstream has split libraries in such a strange way you can't build with no_undefined
-%define _disable_ld_no_undefined 0
-
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
 Version:	2.31.6
@@ -133,8 +130,7 @@ with mono.
 --enable-mono=yes
 %endif
 
-#gw parallel make broken in 2.27.2
-make
+%make
 
 %install
 [ -n "%{buildroot}" -a "%{buildroot}" != / ] && rm -rf %{buildroot}
