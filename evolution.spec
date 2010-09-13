@@ -12,8 +12,8 @@
 
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
-Version:	2.31.91
-Release:	%mkrel 2
+Version:	2.31.92
+Release:	%mkrel 1
 License: 	LGPLv2+
 Group:		Networking/Mail
 Source0: 	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
@@ -236,6 +236,7 @@ cat %name.lang >> %{name}-%{major_version}.lang
 %dir %{_libdir}/evolution/%{major_version}/modules/
 %{_libdir}/evolution/%{major_version}/modules/libevolution-module-addressbook.*
 %{_libdir}/evolution/%{major_version}/modules/libevolution-module-calendar.*
+%{_libdir}/evolution/%{major_version}/modules/libevolution-module-composer-autosave.*
 %{_libdir}/evolution/%{major_version}/modules/libevolution-module-mail.*
 %{_libdir}/evolution/%{major_version}/modules/libevolution-module-mailto-handler.*
 %{_libdir}/evolution/%{major_version}/modules/libevolution-module-plugin-lib.*
