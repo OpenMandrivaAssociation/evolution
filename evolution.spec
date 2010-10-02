@@ -165,7 +165,7 @@ Exec=%{_libdir}/evolution/%{major_version}/evolution-alarm-notify
 Terminal=false
 Type=Application
 OnlyShowIn=GNOME;
-Categories=
+Categories=TrayIcon;
 EOF
 
 #remove unpackaged files
