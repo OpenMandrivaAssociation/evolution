@@ -58,7 +58,7 @@ BuildRequires: openldap-devel
 BuildRequires: libnotify-devel >= 0.3.0
 BuildRequires: libgweather-devel
 BuildRequires: libgnome-desktop-2-devel >= 2.26.0
-BuildRequires: libcanberra-devel
+BuildRequires: libcanberra-gtk-devel
 BuildRequires: unique-devel < 2
 BuildRequires: libchamplain-devel >= 0.7.1
 BuildRequires: libgeoclue-devel
