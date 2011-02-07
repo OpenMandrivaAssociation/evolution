@@ -63,6 +63,7 @@ BuildRequires: unique-devel < 2
 BuildRequires: libchamplain-devel >= 0.7.1
 BuildRequires: libgeoclue-devel
 #gw needed by the tnef plugin
+BuildRequires: networkmanager-devel
 BuildRequires: libytnef-devel
 BuildRequires: gnome-icon-theme
 BuildRequires: gnome-doc-utils
@@ -131,7 +132,6 @@ autoconf
 --enable-plugins=experimental \
 --with-krb5=%{_prefix} --with-krb5-libs=%{_libdir} \
 --with-openldap=yes --with-static-ldap=no --with-sub-version="-%{release}"  \
---disable-nm \
 %if %with_mono
 --enable-mono=yes
 %endif
@@ -241,6 +241,7 @@ cat %name.lang >> %{name}-%{major_version}.lang
 %{_libdir}/evolution/%{major_version}/modules/libevolution-module-composer-autosave.*
 %{_libdir}/evolution/%{major_version}/modules/libevolution-module-mail.*
 %{_libdir}/evolution/%{major_version}/modules/libevolution-module-mailto-handler.*
+%{_libdir}/evolution/%{major_version}/modules/libevolution-module-network-manager.*
 %{_libdir}/evolution/%{major_version}/modules/libevolution-module-plugin-lib.*
 %{_libdir}/evolution/%{major_version}/modules/libevolution-module-startup-wizard.*
 %dir %{_libdir}/evolution/%{major_version}/plugins
