@@ -27,7 +27,8 @@ Patch2: evolution-2.32.0-mono2.8.patch
 Patch17:	evolution-2.27.3-firstmail.patch
 # (fc) 2.22.0-4mdv set back spamassassin as default spam software (typo in gconf key from upstream)
 Patch24:	evolution-2.22.0-spamassassin.patch
-
+Patch25:	evolution-2.32.2-gtk2.24.patch
+Patch26:	evolution-2.32.2-libnotify0.7.patch
 URL: 		http://www.gnome.org/projects/evolution/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 
@@ -123,8 +124,9 @@ with mono.
 %patch -p1 -b .diagnostics
 %patch1 -p1
 %patch2 -p1
-#%patch17 -p1 -b .firstmail
 %patch24 -p1 -b .spamassassin
+%patch25 -p0 -b .gtk
+%patch26 -p1 -b .libnotify
 #gw patch1:
 autoconf
 
