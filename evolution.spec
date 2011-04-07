@@ -127,9 +127,8 @@ with mono.
 %patch24 -p1 -b .spamassassin
 %patch25 -p0 -b .gtk
 %patch26 -p1 -b .libnotify
-#gw patch1:
-autoconf
 
+autoreconf -fi
 %build
 
 %configure2_5x \
