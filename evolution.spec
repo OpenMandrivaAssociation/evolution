@@ -13,7 +13,7 @@
 Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
 Version:	2.32.2
-Release:	%mkrel 5
+Release:	%mkrel 6
 License: 	LGPLv2+
 Group:		Networking/Mail
 Source0: 	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
@@ -91,6 +91,7 @@ Obsoletes:	libevolution0-devel
 Provides:	libevolution0-devel
 #gw libtool dep:
 Requires: libsm-devel
+Requires: libcanberra-gtk-devel
 
 %description -n %{name}-devel
 Evolution is the GNOME mailer, calendar, contact manager and
