@@ -62,7 +62,7 @@ BuildRequires: libgnome-desktop-2-devel >= 2.26.0
 BuildRequires: libcanberra-gtk-devel
 BuildRequires: unique-devel < 2
 BuildRequires: libchamplain-devel >= 0.7.1
-BuildRequires: libgeoclue-devel
+BuildRequires: geoclue-devel
 #gw needed by the tnef plugin
 BuildRequires: networkmanager-devel
 BuildRequires: libytnef-devel
