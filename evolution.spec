@@ -17,6 +17,7 @@ Group:		Networking/Mail
 URL: 		http://www.gnome.org/projects/evolution/
 Source0: 	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.xz
 Patch0:		evolution-2.2.3-no-diagnostics.patch
+Patch1:		evolution-3.2.2_g_thread_init.patch
 
 BuildRequires: gtk-doc
 BuildRequires: gnome-doc-utils
@@ -52,6 +53,7 @@ BuildRequires: pkgconfig(libnotify) >= 0.5.1
 BuildRequires: pkgconfig(libpst)
 BuildRequires: pkgconfig(libsoup-gnome-2.4) >= 2.31.2
 BuildRequires: pkgconfig(libxml-2.0) >= 2.7.3
+BuildRequires: pkgconfig(libnm-glib)
 BuildRequires: pkgconfig(mx-1.0)
 BuildRequires: pkgconfig(nspr)
 BuildRequires: pkgconfig(nss)
@@ -71,6 +73,13 @@ communications tool.  The tools which make up Evolution will
 be tightly integrated with one another and act as a seamless
 personal information-management tool. 
 
+%package -n %{libname}
+Group:      System/Libraries
+Summary:    Shared library of %{name}
+
+%description -n %{libname}
+This package contains the shared libraries for %{name}.
+
 %package -n %{develname}
 Summary:	Libraries and include files for developing Evolution components
 Group:		Development/GNOME and GTK+
@@ -81,7 +90,7 @@ Obsoletes:	%{name}-devel
 This package contains the files necessary to develop applications
 using Evolution's libraries.
 
-%if %with_mono
+%if %{with_mono}
 %package mono
 Summary: Mono plugin loader for Evolution
 Group: Communications
@@ -112,12 +121,12 @@ for inbox in mail/default/*/Inbox; do
 %configure2_5x \
 	--disable-static \
 	--enable-plugins=experimental \
-	--with-krb5=%{_prefix}
+	--with-krb5=%{_prefix} \
 	--with-krb5-libs=%{_libdir} \
-	--with-openldap=yes
-	--with-static-ldap=no
+	--with-openldap=yes \
+	--with-static-ldap=no \
 	--with-sub-version="-%{release}"  \
-%if %with_mono
+%if %{with_mono}
 	--enable-mono=yes
 %endif
 
@@ -144,7 +153,7 @@ Encoding=UTF-8
 Name=Evolution Alarm Notifier
 Comment=Evolution Alarm Notifier
 Icon=stock_alarm
-Exec=%{_libdir}/evolution/%{major_version}/evolution-alarm-notify
+Exec=%{_libdir}/evolution/%{api}/evolution-alarm-notify
 Terminal=false
 Type=Application
 OnlyShowIn=GNOME;
@@ -154,16 +163,16 @@ EOF
 # do not package obsolete mime-info files, evolution doesn't import them on commandline (Mdv bug #53984)
 rm -fr %{buildroot}/%{_datadir}/mime-info
 
-%{find_lang} %{name}-%{major_version} --with-gnome
+%{find_lang} %{name}-%{api} --with-gnome
 %{find_lang} %{name} --with-gnome
-cat %{name}.lang >> %{name}-%{major_version}.lang
+cat %{name}.lang >> %{name}-%{api}.lang
 
-%define schemas apps_evolution_eplugin_face apps-evolution-external-editor apps_evolution_email_custom_header apps-evolution-mail-notification apps-evolution-mail-prompts-checkdefault apps_evolution_addressbook apps_evolution_calendar apps_evolution_shell bogo-junk-plugin evolution-mail apps-evolution-attachment-reminder apps-evolution-template-placeholders
+%define schemas apps_evolution_eplugin_face apps-evolution-external-editor apps_evolution_email_custom_header apps-evolution-mail-notification apps-evolution-mail-prompts-checkdefault apps_evolution_addressbook apps_evolution_calendar apps_evolution_shell evolution-mail apps-evolution-attachment-reminder apps-evolution-template-placeholders evolution-bogofilter.schemas evolution-spamassassin.schemas
 
 %preun
 %preun_uninstall_gconf_schemas %{schemas}
 
-%files -f %{name}-%{major_version}.lang
+%files -f %{name}-%{api}.lang
 %doc AUTHORS COPYING ChangeLog NEWS README
 %{_sysconfdir}/xdg/autostart/*.desktop
 %{_sysconfdir}/gconf/schemas/apps-evolution-external-editor.schemas
@@ -176,38 +185,41 @@ cat %{name}.lang >> %{name}-%{major_version}.lang
 %{_sysconfdir}/gconf/schemas/apps-evolution-attachment-reminder.schemas
 %{_sysconfdir}/gconf/schemas/apps_evolution_calendar.schemas
 %{_sysconfdir}/gconf/schemas/apps_evolution_shell.schemas
-%{_sysconfdir}/gconf/schemas/bogo-junk-plugin.schemas
 %{_sysconfdir}/gconf/schemas/evolution-mail.schemas
+%{_sysconfdir}/gconf/schemas/evolution-bogofilter.schemas
+%{_sysconfdir}/gconf/schemas/evolution-spamassassin.schemas
 %{_bindir}/*
 %dir %{_libdir}/evolution
-%dir %{_libdir}/evolution/%{major_version}
-%dir %{_libdir}/evolution/%{major_version}/modules/
-%dir %{_libdir}/evolution/%{major_version}/plugins
-%{_libdir}/evolution/%{major_version}/csv2vcard
-%{_libdir}/evolution/%{major_version}/evolution-addressbook-clean
-%{_libdir}/evolution/%{major_version}/evolution-addressbook-export
-%{_libdir}/evolution/%{major_version}/evolution-alarm-notify
-%{_libdir}/evolution/%{major_version}/evolution-backup
-%{_libdir}/evolution/%{major_version}/evolution-alarm-notify
-%{_libdir}/evolution/%{major_version}/killev
-%{_libdir}/evolution/%{major_version}/modules/libevolution-module-*.so
-%{_libdir}/evolution/%{major_version}/plugins/liborg-gnome-*.so
-%{_libdir}/evolution/%{major_version}/plugins/org-gnome*.eplug
+%dir %{_libdir}/evolution/%{api}
+%dir %{_libdir}/evolution/%{api}/modules/
+%dir %{_libdir}/evolution/%{api}/plugins
+%{_libdir}/evolution/%{api}/csv2vcard
+%{_libdir}/evolution/%{api}/evolution-addressbook-clean
+%{_libdir}/evolution/%{api}/evolution-addressbook-export
+%{_libdir}/evolution/%{api}/evolution-alarm-notify
+%{_libdir}/evolution/%{api}/evolution-backup
+%{_libdir}/evolution/%{api}/killev
+%{_libdir}/evolution/%{api}/modules/libevolution-module-*.so
+%{_libdir}/evolution/%{api}/plugins/liborg-gnome-*.so
+%{_libdir}/evolution/%{api}/plugins/org-gnome*.eplug
+%if %{with_mono}
+%exclude %{_libdir}/evolution/%{api}/modules/*mono*
+%endif
 %{_datadir}/applications/*
 %{_datadir}/evolution
 %{_datadir}/icons/hicolor/*/apps/*
 
 %files -n %{libname}
-%{_libdir}/evolution/%{major_version}/*.so.%{major}*
+%{_libdir}/evolution/%{api}/*.so.%{major}*
 
 %files -n %{develname}
 %{_includedir}/*
 %{_libdir}/pkgconfig/*
-%{_libdir}/evolution/%{major_version}/*.so
+%{_libdir}/evolution/%{api}/*.so
 %{_datadir}/gtk-doc/html/*
 
-%if %with_mono
+%if %{with_mono}
 %files mono
-%{_libdir}/evolution/%{major_version}/modules/*mono*
+%{_libdir}/evolution/%{api}/modules/*mono*
 %endif
 
