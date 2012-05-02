@@ -8,16 +8,15 @@
 %define with_mono 0
 %endif
 
-Name:		evolution
 Summary:	Integrated GNOME mail client, calendar and address book
-Version:	3.2.2
+Name:		evolution
+Version:	3.4.1
 Release:	1
 License: 	LGPLv2+
 Group:		Networking/Mail
 URL: 		http://www.gnome.org/projects/evolution/
 Source0: 	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.xz
 Patch0:		evolution-2.2.3-no-diagnostics.patch
-Patch1:		evolution-3.2.2_g_thread_init.patch
 
 BuildRequires: gtk-doc
 BuildRequires: gnome-doc-utils
@@ -133,7 +132,6 @@ for inbox in mail/default/*/Inbox; do
 %make
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
 #remove unpackaged files
 rm -rf %{buildroot}/var/lib/
@@ -194,7 +192,6 @@ cat %{name}.lang >> %{name}-%{api}.lang
 %dir %{_libdir}/evolution/%{api}/modules/
 %dir %{_libdir}/evolution/%{api}/plugins
 %{_libdir}/evolution/%{api}/csv2vcard
-%{_libdir}/evolution/%{api}/evolution-addressbook-clean
 %{_libdir}/evolution/%{api}/evolution-addressbook-export
 %{_libdir}/evolution/%{api}/evolution-alarm-notify
 %{_libdir}/evolution/%{api}/evolution-backup
@@ -207,6 +204,8 @@ cat %{name}.lang >> %{name}-%{api}.lang
 %endif
 %{_datadir}/applications/*
 %{_datadir}/evolution
+%{_datadir}/GConf/gsettings/evolution.convertA
+%{_datadir}/glib-2.0/schemas/*.xml
 %{_datadir}/icons/hicolor/*/apps/*
 
 %files -n %{libname}
@@ -216,7 +215,7 @@ cat %{name}.lang >> %{name}-%{api}.lang
 %{_includedir}/*
 %{_libdir}/pkgconfig/*
 %{_libdir}/evolution/%{api}/*.so
-%{_datadir}/gtk-doc/html/*
+%doc %{_datadir}/gtk-doc/html/*
 
 %if %{with_mono}
 %files mono
