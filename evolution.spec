@@ -204,7 +204,7 @@ cat %{name}.lang >> %{name}-%{api}.lang
 %endif
 %{_datadir}/applications/*
 %{_datadir}/evolution
-%{_datadir}/GConf/gsettings/evolution.convertA
+%{_datadir}/GConf/gsettings/evolution.convert
 %{_datadir}/glib-2.0/schemas/*.xml
 %{_datadir}/icons/hicolor/*/apps/*
 
