@@ -1,4 +1,4 @@
-%define api 3.2
+%define api 3.4
 %define major 0
 %define libname %mklibname %{name} %{api} %{major}
 %define develname %mklibname %{name} %{api} -d
@@ -161,8 +161,8 @@ EOF
 # do not package obsolete mime-info files, evolution doesn't import them on commandline (Mdv bug #53984)
 rm -fr %{buildroot}/%{_datadir}/mime-info
 
-%{find_lang} %{name}-%{api} --with-gnome
-%{find_lang} %{name} --with-gnome
+%find_lang %{name}-%{api} --with-gnome
+%find_lang %{name} --with-gnome
 cat %{name}.lang >> %{name}-%{api}.lang
 
 %define schemas apps_evolution_eplugin_face apps-evolution-external-editor apps_evolution_email_custom_header apps-evolution-mail-notification apps-evolution-mail-prompts-checkdefault apps_evolution_addressbook apps_evolution_calendar apps_evolution_shell evolution-mail apps-evolution-attachment-reminder apps-evolution-template-placeholders evolution-bogofilter.schemas evolution-spamassassin.schemas
