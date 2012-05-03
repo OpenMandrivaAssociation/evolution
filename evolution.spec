@@ -1,7 +1,4 @@
 %define api 3.4
-%define major 0
-%define libname %mklibname %{name} %{api} %{major}
-%define develname %mklibname %{name} %{api} -d
 %define with_mono 1
 
 %ifarch %arm %mips
@@ -65,6 +62,7 @@ Requires: gtkhtml4
 Requires: gnupg
 Requires: gtk+3.0
 Suggests: gstreamer0.10-plugins-good
+# the old shared lib pkg should be obsoleted after everything is rebuilt
 
 %description
 Evolution is the GNOME mailer, calendar, contact manager and
@@ -72,20 +70,13 @@ communications tool.  The tools which make up Evolution will
 be tightly integrated with one another and act as a seamless
 personal information-management tool. 
 
-%package -n %{libname}
-Group:      System/Libraries
-Summary:    Shared library of %{name}
-
-%description -n %{libname}
-This package contains the shared libraries for %{name}.
-
-%package -n %{develname}
+%package devel
 Summary:	Libraries and include files for developing Evolution components
 Group:		Development/GNOME and GTK+
-Requires:	%{libname} = %{version}-%{release}
-Obsoletes:	%{name}-devel
+Requires:	%{name} = %{version}-%{release}
+Obsoletes:	%{_lib}evolution3.2-devel
 
-%description -n %{develname}
+%description devel
 This package contains the files necessary to develop applications
 using Evolution's libraries.
 
@@ -191,6 +182,7 @@ cat %{name}.lang >> %{name}-%{api}.lang
 %dir %{_libdir}/evolution/%{api}
 %dir %{_libdir}/evolution/%{api}/modules/
 %dir %{_libdir}/evolution/%{api}/plugins
+%{_libdir}/evolution/%{api}/*.so
 %{_libdir}/evolution/%{api}/csv2vcard
 %{_libdir}/evolution/%{api}/evolution-addressbook-export
 %{_libdir}/evolution/%{api}/evolution-alarm-notify
@@ -208,13 +200,9 @@ cat %{name}.lang >> %{name}-%{api}.lang
 %{_datadir}/glib-2.0/schemas/*.xml
 %{_datadir}/icons/hicolor/*/apps/*
 
-%files -n %{libname}
-%{_libdir}/evolution/%{api}/*.so.%{major}*
-
 %files -n %{develname}
 %{_includedir}/*
 %{_libdir}/pkgconfig/*
-%{_libdir}/evolution/%{api}/*.so
 %doc %{_datadir}/gtk-doc/html/*
 
 %if %{with_mono}
