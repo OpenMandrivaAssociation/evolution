@@ -200,7 +200,7 @@ cat %{name}.lang >> %{name}-%{api}.lang
 %{_datadir}/glib-2.0/schemas/*.xml
 %{_datadir}/icons/hicolor/*/apps/*
 
-%files -n %{develname}
+%files devel
 %{_includedir}/*
 %{_libdir}/pkgconfig/*
 %doc %{_datadir}/gtk-doc/html/*
