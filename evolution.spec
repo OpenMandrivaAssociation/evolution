@@ -16,7 +16,7 @@ Source0: 	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.x
 Patch0:		evolution-2.2.3-no-diagnostics.patch
 
 BuildRequires: gtk-doc
-BuildRequires: gnome-doc-utils
+BuildRequires: pkgconfig(gnome-doc-utils)
 BuildRequires: intltool
 BuildRequires: desktop-file-utils
 BuildRequires: openldap-devel
