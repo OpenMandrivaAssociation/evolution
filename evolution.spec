@@ -1,60 +1,57 @@
-%define api 3.4
-%define with_mono 1
-
-%ifarch %arm %mips
-%define with_mono 0
-%endif
+%define api 3.6
+%define url_ver	%(echo %{version}|cut -d. -f1,2)
 
 Summary:	Integrated GNOME mail client, calendar and address book
 Name:		evolution
-Version:	3.4.4
+Version:	3.6.2
 Release:	1
 License: 	LGPLv2+
 Group:		Networking/Mail
 URL: 		http://www.gnome.org/projects/evolution/
-Source0: 	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.xz
-Patch0:		evolution-2.2.3-no-diagnostics.patch
+Source0: 	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 
-BuildRequires: gtk-doc
-BuildRequires: pkgconfig(gnome-doc-utils)
-BuildRequires: intltool
-BuildRequires: desktop-file-utils
-BuildRequires: openldap-devel
-BuildRequires: pkgconfig(atk)
-BuildRequires: pkgconfig(cairo-gobject)
-BuildRequires: pkgconfig(camel-1.2) >= %{version}
-BuildRequires: pkgconfig(clutter-1.0) >= 1.0.0
-BuildRequires: pkgconfig(clutter-gtk-1.0) >= 0.90
-BuildRequires: pkgconfig(gail-3.0) >= 3.0.2
-BuildRequires: pkgconfig(gconf-2.0) >= 2.0.0
-BuildRequires: pkgconfig(gio-2.0) >= 2.30
-BuildRequires: pkgconfig(gnome-desktop-3.0) >= 2.91.3
-BuildRequires: pkgconfig(gnome-icon-theme) >= 2.30.2.1
-BuildRequires: pkgconfig(goa-1.0) >= 3.1.1
-BuildRequires: pkgconfig(gsettings-desktop-schemas) >= 2.91.92
-BuildRequires: pkgconfig(gstreamer-0.10)
-BuildRequires: pkgconfig(gtkhtml-editor-4.0)
-BuildRequires: pkgconfig(gtk+-3.0) >= 3.2.0
-BuildRequires: pkgconfig(gweather-3.0) >= 2.90.0
-BuildRequires: pkgconfig(ice)
-BuildRequires: pkgconfig(libcanberra-gtk3) >= 0.25
-BuildRequires: pkgconfig(libebackend-1.2) >= %{version}
-BuildRequires: pkgconfig(libebook-1.2) >= %{version}
-BuildRequires: pkgconfig(libecal-1.2) >= %{version}
-BuildRequires: pkgconfig(libedataserver-1.2) >= %{version}
-BuildRequires: pkgconfig(libedataserverui-3.0) >= %{version}
-BuildRequires: pkgconfig(libgdata) >= 0.10.0
-BuildRequires: pkgconfig(libgtkhtml-4.0) >= 4.1.2
-BuildRequires: pkgconfig(libnotify) >= 0.5.1
-BuildRequires: pkgconfig(libpst)
-BuildRequires: pkgconfig(libsoup-gnome-2.4) >= 2.31.2
-BuildRequires: pkgconfig(libxml-2.0) >= 2.7.3
-BuildRequires: pkgconfig(libnm-glib)
-BuildRequires: pkgconfig(mx-1.0)
-BuildRequires: pkgconfig(nspr)
-BuildRequires: pkgconfig(nss)
-BuildRequires: pkgconfig(shared-mime-info) >= 0.22
-BuildRequires: pkgconfig(sm)
+BuildRequires:	gtk-doc
+BuildRequires:	intltool
+BuildRequires:	itstool
+BuildRequires:	desktop-file-utils
+BuildRequires:	openldap-devel
+BuildRequires:	pkgconfig(atk)
+BuildRequires:	pkgconfig(cairo-gobject)
+BuildRequires:	pkgconfig(camel-1.2) >= %{version}
+BuildRequires:	pkgconfig(clutter-1.0) >= 1.0.0
+BuildRequires:	pkgconfig(clutter-gtk-1.0) >= 0.90
+BuildRequires:	pkgconfig(gail-3.0) >= 3.0.2
+BuildRequires:	pkgconfig(gconf-2.0) >= 2.0.0
+BuildRequires:	pkgconfig(gnome-doc-utils)
+BuildRequires:	pkgconfig(gio-2.0) >= 2.30
+BuildRequires:	pkgconfig(gnome-desktop-3.0) >= 2.91.3
+BuildRequires:	pkgconfig(gnome-icon-theme) >= 2.30.2.1
+BuildRequires:	pkgconfig(goa-1.0) >= 3.1.1
+BuildRequires:	pkgconfig(gsettings-desktop-schemas) >= 2.91.92
+BuildRequires:	pkgconfig(gstreamer-0.10)
+BuildRequires:	pkgconfig(gtkhtml-editor-4.0)
+BuildRequires:	pkgconfig(gtk+-3.0) >= 3.2.0
+BuildRequires:	pkgconfig(gweather-3.0) >= 2.90.0
+BuildRequires:	pkgconfig(ice)
+BuildRequires:	pkgconfig(libcanberra-gtk3) >= 0.25
+BuildRequires:	pkgconfig(libebackend-1.2) >= %{version}
+BuildRequires:	pkgconfig(libebook-1.2) >= %{version}
+BuildRequires:	pkgconfig(libecal-1.2) >= %{version}
+BuildRequires:	pkgconfig(libedataserver-1.2) >= %{version}
+BuildRequires:	pkgconfig(libedataserverui-3.0) >= %{version}
+BuildRequires:	pkgconfig(libgdata) >= 0.10.0
+BuildRequires:	pkgconfig(libgtkhtml-4.0) >= 4.1.2
+BuildRequires:	pkgconfig(libnotify) >= 0.5.1
+BuildRequires:	pkgconfig(libpst)
+BuildRequires:	pkgconfig(libsoup-gnome-2.4) >= 2.31.2
+BuildRequires:	pkgconfig(libxml-2.0) >= 2.7.3
+BuildRequires:	pkgconfig(libnm-glib)
+BuildRequires:	pkgconfig(mx-1.0)
+BuildRequires:	pkgconfig(nspr)
+BuildRequires:	pkgconfig(nss)
+BuildRequires:	pkgconfig(shared-mime-info) >= 0.22
+BuildRequires:	pkgconfig(sm)
+BuildRequires:	pkgconfig(webkitgtk-3.0)
 
 # (fc) 0.8-5mdk implicit dependency is not enough
 Requires: evolution-data-server >= %{version}
@@ -80,24 +77,6 @@ Obsoletes:	%{_lib}evolution3.2-devel
 This package contains the files necessary to develop applications
 using Evolution's libraries.
 
-%if %{with_mono}
-%package mono
-Summary: Mono plugin loader for Evolution
-Group: Communications
-BuildRequires: mono-devel
-Requires: %{name} = %{version}
-Requires: mono
-
-%description mono
-Evolution is the GNOME mailer, calendar, contact manager and
-communications tool.  The tools which make up Evolution will
-be tightly integrated with one another and act as a seamless
-personal information-management tool.
-
-This is the Mono plugin loader that adds support for plugins developed 
-with mono.
-%endif
-
 %prep
 %setup -q
 %apply_patches
@@ -110,15 +89,12 @@ for inbox in mail/default/*/Inbox; do
 %build
 %configure2_5x \
 	--disable-static \
-	--enable-plugins=experimental \
+	--enable-plugins=all \
 	--with-krb5=%{_prefix} \
 	--with-krb5-libs=%{_libdir} \
 	--with-openldap=yes \
 	--with-static-ldap=no \
-	--with-sub-version="-%{release}"  \
-%if %{with_mono}
-	--enable-mono=yes
-%endif
+	--with-sub-version="-%{release}"
 
 %make
 
@@ -156,27 +132,9 @@ rm -fr %{buildroot}/%{_datadir}/mime-info
 %find_lang %{name} --with-gnome
 cat %{name}.lang >> %{name}-%{api}.lang
 
-%define schemas apps_evolution_eplugin_face apps-evolution-external-editor apps_evolution_email_custom_header apps-evolution-mail-notification apps-evolution-mail-prompts-checkdefault apps_evolution_addressbook apps_evolution_calendar apps_evolution_shell evolution-mail apps-evolution-attachment-reminder apps-evolution-template-placeholders evolution-bogofilter.schemas evolution-spamassassin.schemas
-
-%preun
-%preun_uninstall_gconf_schemas %{schemas}
-
 %files -f %{name}-%{api}.lang
 %doc AUTHORS COPYING ChangeLog NEWS README
 %{_sysconfdir}/xdg/autostart/*.desktop
-%{_sysconfdir}/gconf/schemas/apps-evolution-external-editor.schemas
-%{_sysconfdir}/gconf/schemas/apps_evolution_email_custom_header.schemas
-%{_sysconfdir}/gconf/schemas/apps-evolution-mail-notification.schemas
-%{_sysconfdir}/gconf/schemas/apps-evolution-mail-prompts-checkdefault.schemas
-%{_sysconfdir}/gconf/schemas/apps-evolution-template-placeholders.schemas
-%{_sysconfdir}/gconf/schemas/apps_evolution_addressbook.schemas
-%{_sysconfdir}/gconf/schemas/apps_evolution_eplugin_face.schemas
-%{_sysconfdir}/gconf/schemas/apps-evolution-attachment-reminder.schemas
-%{_sysconfdir}/gconf/schemas/apps_evolution_calendar.schemas
-%{_sysconfdir}/gconf/schemas/apps_evolution_shell.schemas
-%{_sysconfdir}/gconf/schemas/evolution-mail.schemas
-%{_sysconfdir}/gconf/schemas/evolution-bogofilter.schemas
-%{_sysconfdir}/gconf/schemas/evolution-spamassassin.schemas
 %{_bindir}/*
 %dir %{_libdir}/evolution
 %dir %{_libdir}/evolution/%{api}
@@ -188,12 +146,9 @@ cat %{name}.lang >> %{name}-%{api}.lang
 %{_libdir}/evolution/%{api}/evolution-alarm-notify
 %{_libdir}/evolution/%{api}/evolution-backup
 %{_libdir}/evolution/%{api}/killev
-%{_libdir}/evolution/%{api}/modules/libevolution-module-*.so
-%{_libdir}/evolution/%{api}/plugins/liborg-gnome-*.so
-%{_libdir}/evolution/%{api}/plugins/org-gnome*.eplug
-%if %{with_mono}
-%exclude %{_libdir}/evolution/%{api}/modules/*mono*
-%endif
+%{_libdir}/evolution/%{api}/modules/*.so
+%{_libdir}/evolution/%{api}/plugins/*.so
+%{_libdir}/evolution/%{api}/plugins/*.eplug
 %{_datadir}/applications/*
 %{_datadir}/evolution
 %{_datadir}/GConf/gsettings/evolution.convert
@@ -205,8 +160,6 @@ cat %{name}.lang >> %{name}-%{api}.lang
 %{_libdir}/pkgconfig/*
 %doc %{_datadir}/gtk-doc/html/*
 
-%if %{with_mono}
-%files mono
-%{_libdir}/evolution/%{api}/modules/*mono*
-%endif
-
+%changelog
+* Tue Nov 13 2012 Arkady L. Shane <ashejn@rosalab.ru> 3.6.2-1
+- update to 3.6.2
