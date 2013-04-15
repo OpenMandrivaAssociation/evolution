@@ -1,5 +1,6 @@
-%define api 3.6
 %define url_ver	%(echo %{version}|cut -d. -f1,2)
+%define gstapi	0.10
+%define api	3.6
 
 Summary:	Integrated GNOME mail client, calendar and address book
 Name:		evolution
@@ -8,7 +9,7 @@ Release:	1
 License: 	LGPLv2+
 Group:		Networking/Mail
 URL: 		http://www.gnome.org/projects/evolution/
-Source0: 	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
+Source0: 	http://ftp.gnome.org/pub/GNOME/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 
 BuildRequires:	gtk-doc
 BuildRequires:	intltool
@@ -28,7 +29,7 @@ BuildRequires:	pkgconfig(gnome-desktop-3.0) >= 2.91.3
 BuildRequires:	pkgconfig(gnome-icon-theme) >= 2.30.2.1
 BuildRequires:	pkgconfig(goa-1.0) >= 3.1.1
 BuildRequires:	pkgconfig(gsettings-desktop-schemas) >= 2.91.92
-BuildRequires:	pkgconfig(gstreamer-0.10)
+BuildRequires:	pkgconfig(gstreamer-%{gstapi})
 BuildRequires:	pkgconfig(gtkhtml-editor-4.0)
 BuildRequires:	pkgconfig(gtk+-3.0) >= 3.2.0
 BuildRequires:	pkgconfig(gweather-3.0) >= 2.90.0
@@ -58,7 +59,7 @@ Requires: evolution-data-server >= %{version}
 Requires: gtkhtml4 
 Requires: gnupg
 Requires: gtk+3.0
-Suggests: gstreamer0.10-plugins-good
+Suggests: gstreamer%{gstapi}-plugins-good
 # the old shared lib pkg should be obsoleted after everything is rebuilt
 
 %description
@@ -71,7 +72,6 @@ personal information-management tool.
 Summary:	Libraries and include files for developing Evolution components
 Group:		Development/GNOME and GTK+
 Requires:	%{name} = %{version}-%{release}
-Obsoletes:	%{_lib}evolution3.2-devel
 
 %description devel
 This package contains the files necessary to develop applications
@@ -83,8 +83,8 @@ using Evolution's libraries.
 
 # Remove the welcome email from Novell
 for inbox in mail/default/*/Inbox; do
-		echo -n "" > $inbox
-	done
+	echo -n "" > $inbox
+done
 
 %build
 %configure2_5x \
@@ -105,11 +105,12 @@ rm -rf %{buildroot}/var/lib/
 find %{buildroot} -type f -name "*.la" -exec rm -f {} ';'
 
 desktop-file-install --vendor="" \
-  --remove-category="Office" \
-  --remove-category="Calendar" \
-  --remove-category="ContactManagement" \
-  --add-category="Network" \
-  --dir %{buildroot}%{_datadir}/applications %{buildroot}%{_datadir}/applications/evolution.desktop
+	--remove-category="Office" \
+	--remove-category="Calendar" \
+	--remove-category="ContactManagement" \
+	--add-category="Network" \
+	--dir %{buildroot}%{_datadir}/applications \
+	%{buildroot}%{_datadir}/applications/evolution.desktop
 
 mkdir -p %{buildroot}%{_sysconfdir}/xdg/autostart/ 
 cat << EOF > %{buildroot}%{_sysconfdir}/xdg/autostart/evolution-alarm-notify.desktop
@@ -153,9 +154,10 @@ cat %{name}.lang >> %{name}-%{api}.lang
 %{_datadir}/evolution
 %{_datadir}/GConf/gsettings/evolution.convert
 %{_datadir}/glib-2.0/schemas/*.xml
-%{_datadir}/icons/hicolor/*/apps/*
+%{_iconsdir}/hicolor/*/apps/*
 
 %files devel
 %{_includedir}/*
 %{_libdir}/pkgconfig/*
 %doc %{_datadir}/gtk-doc/html/*
+
