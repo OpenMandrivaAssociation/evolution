@@ -4,7 +4,7 @@
 
 Summary:	Integrated GNOME mail client, calendar and address book
 Name:		evolution
-Version:	3.6.3
+Version:	3.6.4
 Release:	1
 License: 	LGPLv2+
 Group:		Networking/Mail
