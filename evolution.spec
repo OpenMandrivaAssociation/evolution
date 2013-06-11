@@ -1,11 +1,11 @@
 %define url_ver	%(echo %{version}|cut -d. -f1,2)
 %define gstapi	0.10
-%define api	3.6
+%define api	3.8
 
 Summary:	Integrated GNOME mail client, calendar and address book
 Name:		evolution
-Version:	3.6.4
-Release:	2
+Version:	3.8.3
+Release:	1
 License: 	LGPLv2+
 Group:		Networking/Mail
 URL: 		http://www.gnome.org/projects/evolution/
@@ -17,6 +17,7 @@ BuildRequires:	itstool
 BuildRequires:	desktop-file-utils
 BuildRequires:	openldap-devel
 BuildRequires:	pkgconfig(atk)
+BuildRequires:	pkgconfig(libsecret-unstable)	
 BuildRequires:	pkgconfig(cairo-gobject)
 BuildRequires:	pkgconfig(camel-1.2) >= %{version}
 BuildRequires:	pkgconfig(clutter-1.0) >= 1.0.0
