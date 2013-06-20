@@ -1,5 +1,5 @@
 %define url_ver	%(echo %{version}|cut -d. -f1,2)
-%define gstapi	0.10
+%define gstapi	1.0
 %define api	3.8
 
 Summary:	Integrated GNOME mail client, calendar and address book
@@ -8,10 +8,12 @@ Version:	3.8.3
 Release:	1
 License: 	LGPLv2+
 Group:		Networking/Mail
-URL: 		http://www.gnome.org/projects/evolution/
+Url: 		http://www.gnome.org/projects/evolution/
 Source0: 	http://ftp.gnome.org/pub/GNOME/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 
+BuildRequires:	bogofilter
 BuildRequires:	gtk-doc
+BuildRequires:	highlight
 BuildRequires:	intltool
 BuildRequires:	itstool
 BuildRequires:	desktop-file-utils
@@ -40,7 +42,6 @@ BuildRequires:	pkgconfig(libebackend-1.2) >= %{version}
 BuildRequires:	pkgconfig(libebook-1.2) >= %{version}
 BuildRequires:	pkgconfig(libecal-1.2) >= %{version}
 BuildRequires:	pkgconfig(libedataserver-1.2) >= %{version}
-BuildRequires:	pkgconfig(libedataserverui-3.0) >= %{version}
 BuildRequires:	pkgconfig(libgdata) >= 0.10.0
 BuildRequires:	pkgconfig(libgtkhtml-4.0) >= 4.1.2
 BuildRequires:	pkgconfig(libnotify) >= 0.5.1
@@ -55,12 +56,14 @@ BuildRequires:	pkgconfig(shared-mime-info) >= 0.22
 BuildRequires:	pkgconfig(sm)
 BuildRequires:	pkgconfig(webkitgtk-3.0)
 
+Requires:	bogofilter
 # (fc) 0.8-5mdk implicit dependency is not enough
-Requires: evolution-data-server >= %{version}
-Requires: gtkhtml4 
-Requires: gnupg
-Requires: gtk+3.0
-Suggests: gstreamer%{gstapi}-plugins-good
+Requires:	evolution-data-server >= %{version}
+Requires:	gtkhtml4 
+Requires:	gnupg
+Requires:	gtk+3.0
+Requires:	highlight
+Suggests:	gstreamer%{gstapi}-plugins-good
 # the old shared lib pkg should be obsoleted after everything is rebuilt
 
 %description
@@ -90,6 +93,7 @@ done
 %build
 %configure2_5x \
 	--disable-static \
+	--disable-spamassassin \
 	--enable-plugins=all \
 	--with-krb5=%{_prefix} \
 	--with-krb5-libs=%{_libdir} \
