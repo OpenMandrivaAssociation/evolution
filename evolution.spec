@@ -155,6 +155,7 @@ cat %{name}.lang >> %{name}-%{api}.lang
 %{_libdir}/evolution/%{api}/modules/*.so
 %{_libdir}/evolution/%{api}/plugins/*.so
 %{_libdir}/evolution/%{api}/plugins/*.eplug
+%{_libexecdir}/%/name}/%{version}/*
 %{_datadir}/applications/*
 %{_datadir}/evolution
 %{_datadir}/GConf/gsettings/evolution.convert
