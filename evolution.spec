@@ -147,15 +147,14 @@ cat %{name}.lang >> %{name}-%{api}.lang
 %dir %{_libdir}/evolution/%{api}/modules/
 %dir %{_libdir}/evolution/%{api}/plugins
 %{_libdir}/evolution/%{api}/*.so
-%{_libdir}/evolution/%{api}/csv2vcard
-%{_libdir}/evolution/%{api}/evolution-addressbook-export
-%{_libdir}/evolution/%{api}/evolution-alarm-notify
-%{_libdir}/evolution/%{api}/evolution-backup
-%{_libdir}/evolution/%{api}/killev
+%{_libexecdir}/evolution/%{api}/csv2vcard
+%{_libexecdir}/evolution/%{api}/evolution-addressbook-export
+%{_libexecdir}/evolution/%{api}/evolution-alarm-notify
+%{_libexecdir}/evolution/%{api}/evolution-backup
+%{_libexecdir}/evolution/%{api}/killev
 %{_libdir}/evolution/%{api}/modules/*.so
 %{_libdir}/evolution/%{api}/plugins/*.so
 %{_libdir}/evolution/%{api}/plugins/*.eplug
-%{_libexecdir}/%{name}/%{api}/*
 %{_datadir}/applications/*
 %{_datadir}/evolution
 %{_datadir}/GConf/gsettings/evolution.convert
