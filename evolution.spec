@@ -159,6 +159,7 @@ cat %{name}.lang >> %{name}-%{api}.lang
 %{_datadir}/evolution
 %{_datadir}/GConf/gsettings/evolution.convert
 %{_datadir}/glib-2.0/schemas/*.xml
+%{_datadir}/appdata/evolution.appdata.xml
 %{_iconsdir}/hicolor/*/apps/*
 
 %files devel
