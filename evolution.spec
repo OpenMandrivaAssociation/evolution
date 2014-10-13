@@ -1,11 +1,11 @@
 %define url_ver	%(echo %{version}|cut -d. -f1,2)
 %define gstapi	1.0
-%define api	3.10
+%define api	3.14
 
 Summary:	Integrated GNOME mail client, calendar and address book
 Name:		evolution
-Version:	3.10.4
-Release:	3
+Version:	3.13.6
+Release:	1
 License: 	LGPLv2+
 Group:		Networking/Mail
 Url: 		http://www.gnome.org/projects/evolution/
@@ -24,6 +24,7 @@ BuildRequires:	pkgconfig(cairo-gobject)
 BuildRequires:	pkgconfig(camel-1.2) >= %{version}
 BuildRequires:	pkgconfig(clutter-1.0) >= 1.0.0
 BuildRequires:	pkgconfig(clutter-gtk-1.0) >= 0.90
+BuildRequires:	pkgconfig(cryptui-0.0)
 BuildRequires:	pkgconfig(gail-3.0) >= 3.0.2
 BuildRequires:	pkgconfig(gconf-2.0) >= 2.0.0
 BuildRequires:	pkgconfig(gnome-doc-utils)
@@ -55,6 +56,7 @@ BuildRequires:	pkgconfig(nss)
 BuildRequires:	pkgconfig(shared-mime-info) >= 0.22
 BuildRequires:	pkgconfig(sm)
 BuildRequires:	pkgconfig(webkitgtk-3.0)
+BuildRequires:	pkgconfig(gtkspell3-3.0)
 
 Requires:	bogofilter
 # (fc) 0.8-5mdk implicit dependency is not enough
@@ -94,6 +96,7 @@ done
 %configure2_5x \
 	--disable-static \
 	--disable-spamassassin \
+	--disable-autoar \
 	--enable-plugins=all \
 	--with-krb5=%{_prefix} \
 	--with-krb5-libs=%{_libdir} \
@@ -143,18 +146,17 @@ cat %{name}.lang >> %{name}-%{api}.lang
 %{_sysconfdir}/xdg/autostart/*.desktop
 %{_bindir}/*
 %dir %{_libdir}/evolution
-%dir %{_libdir}/evolution/%{api}
-%dir %{_libdir}/evolution/%{api}/modules/
-%dir %{_libdir}/evolution/%{api}/plugins
-%{_libdir}/evolution/%{api}/*.so
-%{_libexecdir}/evolution/%{api}/csv2vcard
-%{_libexecdir}/evolution/%{api}/evolution-addressbook-export
-%{_libexecdir}/evolution/%{api}/evolution-alarm-notify
-%{_libexecdir}/evolution/%{api}/evolution-backup
-%{_libexecdir}/evolution/%{api}/killev
-%{_libdir}/evolution/%{api}/modules/*.so
-%{_libdir}/evolution/%{api}/plugins/*.so
-%{_libdir}/evolution/%{api}/plugins/*.eplug
+%dir %{_libdir}/evolution/modules/
+%dir %{_libdir}/evolution/plugins
+%{_libdir}/evolution/*.so
+%{_libexecdir}/evolution/csv2vcard
+%{_libexecdir}/evolution/evolution-addressbook-export
+%{_libexecdir}/evolution/evolution-alarm-notify
+%{_libexecdir}/evolution/evolution-backup
+%{_libexecdir}/evolution/killev
+%{_libdir}/evolution/modules/*.so
+%{_libdir}/evolution/plugins/*.so
+%{_libdir}/evolution/plugins/*.eplug
 %{_datadir}/applications/*
 %{_datadir}/evolution
 %{_datadir}/GConf/gsettings/evolution.convert
