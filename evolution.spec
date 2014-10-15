@@ -22,6 +22,7 @@ BuildRequires:	pkgconfig(atk)
 BuildRequires:	pkgconfig(libsecret-unstable)	
 BuildRequires:	pkgconfig(cairo-gobject)
 BuildRequires:	pkgconfig(camel-1.2) >= %{version}
+BuildRequires:	pkgconfig(champlain-0.12)
 BuildRequires:	pkgconfig(clutter-1.0) >= 1.0.0
 BuildRequires:	pkgconfig(clutter-gtk-1.0) >= 0.90
 BuildRequires:	pkgconfig(cryptui-0.0)
@@ -50,7 +51,6 @@ BuildRequires:	pkgconfig(libpst)
 BuildRequires:	pkgconfig(libsoup-gnome-2.4) >= 2.31.2
 BuildRequires:	pkgconfig(libxml-2.0) >= 2.7.3
 BuildRequires:	pkgconfig(libnm-glib)
-BuildRequires:	pkgconfig(mx-1.0)
 BuildRequires:	pkgconfig(nspr)
 BuildRequires:	pkgconfig(nss)
 BuildRequires:	pkgconfig(shared-mime-info) >= 0.22
