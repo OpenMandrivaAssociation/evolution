@@ -5,7 +5,7 @@
 Summary:	Integrated GNOME mail client, calendar and address book
 Name:		evolution
 Version:	3.13.6
-Release:	4
+Release:	5
 License: 	LGPLv2+
 Group:		Networking/Mail
 Url: 		http://www.gnome.org/projects/evolution/
@@ -31,7 +31,6 @@ BuildRequires:	pkgconfig(gconf-2.0) >= 2.0.0
 BuildRequires:	pkgconfig(gnome-doc-utils)
 BuildRequires:	pkgconfig(gio-2.0) >= 2.30
 BuildRequires:	pkgconfig(gnome-desktop-3.0) >= 2.91.3
-BuildRequires:	pkgconfig(gnome-icon-theme) >= 2.30.2.1
 BuildRequires:	pkgconfig(goa-1.0) >= 3.1.1
 BuildRequires:	pkgconfig(gsettings-desktop-schemas) >= 2.91.92
 BuildRequires:	pkgconfig(gstreamer-%{gstapi})
@@ -93,8 +92,7 @@ for inbox in mail/default/*/Inbox; do
 done
 
 %build
-%configure2_5x \
-	--disable-static \
+%configure \
 	--disable-spamassassin \
 	--disable-autoar \
 	--enable-plugins=all \
