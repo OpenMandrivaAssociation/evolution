@@ -5,7 +5,7 @@
 Summary:	Integrated GNOME mail client, calendar and address book
 Name:		evolution
 Version:	3.13.6
-Release:	5
+Release:	6
 License: 	LGPLv2+
 Group:		Networking/Mail
 Url: 		http://www.gnome.org/projects/evolution/
@@ -34,7 +34,6 @@ BuildRequires:	pkgconfig(gnome-desktop-3.0) >= 2.91.3
 BuildRequires:	pkgconfig(goa-1.0) >= 3.1.1
 BuildRequires:	pkgconfig(gsettings-desktop-schemas) >= 2.91.92
 BuildRequires:	pkgconfig(gstreamer-%{gstapi})
-BuildRequires:	pkgconfig(gtkhtml-editor-4.0)
 BuildRequires:	pkgconfig(gtk+-3.0) >= 3.2.0
 BuildRequires:	pkgconfig(gweather-3.0) >= 2.90.0
 BuildRequires:	pkgconfig(ice)
@@ -44,7 +43,6 @@ BuildRequires:	pkgconfig(libebook-1.2) >= %{version}
 BuildRequires:	pkgconfig(libecal-1.2) >= %{version}
 BuildRequires:	pkgconfig(libedataserver-1.2) >= %{version}
 BuildRequires:	pkgconfig(libgdata) >= 0.10.0
-BuildRequires:	pkgconfig(libgtkhtml-4.0) >= 4.1.2
 BuildRequires:	pkgconfig(libnotify) >= 0.5.1
 BuildRequires:	pkgconfig(libpst)
 BuildRequires:	pkgconfig(libsoup-gnome-2.4) >= 2.31.2
@@ -60,7 +58,6 @@ BuildRequires:	pkgconfig(gtkspell3-3.0)
 Requires:	bogofilter
 # (fc) 0.8-5mdk implicit dependency is not enough
 Requires:	evolution-data-server >= %{version}
-Requires:	gtkhtml4 
 Requires:	gnupg
 Requires:	gtk+3.0
 Requires:	highlight
