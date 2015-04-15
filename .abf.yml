@@ -1,6 +1,7 @@
 removed_sources:
   evolution-3.10.4.tar.xz: ece523e4b43e077a6a75f6d2994ea0a7e506408a
+  evolution-3.13.6.tar.xz: e4f95ec5bd24831dd139719c36653efa9fef4902
   evolution-3.6.2.tar.xz: 1b5eb4989bf255dd41c4fd9d28accfe61ad332bb
   evolution-3.6.4.tar.xz: b9721f161c57cba63e151d9af78911147fdfd8a1
 sources:
-  evolution-3.13.6.tar.xz: e4f95ec5bd24831dd139719c36653efa9fef4902
+  evolution-3.16.1.tar.xz: 39ea07f5ec5bf6105906107f86c869f3b62f0ab9
