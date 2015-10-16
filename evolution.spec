@@ -2,6 +2,8 @@
 %define gstapi	1.0
 %define api	3.18
 
+%define _disable_rebuild_configure 1
+
 Summary:	Integrated GNOME mail client, calendar and address book
 Name:		evolution
 Version:	3.18.1
