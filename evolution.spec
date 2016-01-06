@@ -6,7 +6,7 @@
 
 Summary:	Integrated GNOME mail client, calendar and address book
 Name:		evolution
-Version:	3.18.1
+Version:	3.18.3
 Release:	2
 License: 	LGPLv2+
 Group:		Networking/Mail
@@ -21,7 +21,7 @@ BuildRequires:	itstool
 BuildRequires:	desktop-file-utils
 BuildRequires:	openldap-devel
 BuildRequires:	pkgconfig(atk)
-BuildRequires:	pkgconfig(libsecret-unstable)	
+BuildRequires:	pkgconfig(libsecret-unstable)
 BuildRequires:	pkgconfig(cairo-gobject)
 BuildRequires:	pkgconfig(camel-1.2) >= %{version}
 BuildRequires:	pkgconfig(champlain-0.12)
@@ -69,7 +69,7 @@ Suggests:	gstreamer%{gstapi}-plugins-good
 Evolution is the GNOME mailer, calendar, contact manager and
 communications tool.  The tools which make up Evolution will
 be tightly integrated with one another and act as a seamless
-personal information-management tool. 
+personal information-management tool.
 
 %package devel
 Summary:	Libraries and include files for developing Evolution components
@@ -116,7 +116,7 @@ desktop-file-install --vendor="" \
 	--dir %{buildroot}%{_datadir}/applications \
 	%{buildroot}%{_datadir}/applications/evolution.desktop
 
-mkdir -p %{buildroot}%{_sysconfdir}/xdg/autostart/ 
+mkdir -p %{buildroot}%{_sysconfdir}/xdg/autostart/
 cat << EOF > %{buildroot}%{_sysconfdir}/xdg/autostart/evolution-alarm-notify.desktop
 [Desktop Entry]
 Encoding=UTF-8
