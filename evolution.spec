@@ -1,13 +1,13 @@
 %define url_ver	%(echo %{version}|cut -d. -f1,2)
 %define gstapi	1.0
-%define api	3.18
+%define api	3.22
 
 %define _disable_rebuild_configure 1
 
 Summary:	Integrated GNOME mail client, calendar and address book
 Name:		evolution
-Version:	3.18.3
-Release:	2
+Version:	3.22.3
+Release:	1
 License: 	LGPLv2+
 Group:		Networking/Mail
 Url: 		http://www.gnome.org/projects/evolution/
@@ -53,7 +53,7 @@ BuildRequires:	pkgconfig(nspr)
 BuildRequires:	pkgconfig(nss)
 BuildRequires:	pkgconfig(shared-mime-info) >= 0.22
 BuildRequires:	pkgconfig(sm)
-BuildRequires:	pkgconfig(webkitgtk-3.0)
+BuildRequires:	pkgconfig(webkit2gtk-4.0)
 BuildRequires:	pkgconfig(gtkspell3-3.0)
 
 Requires:	bogofilter
@@ -144,9 +144,8 @@ cat %{name}.lang >> %{name}-%{api}.lang
 %dir %{_libdir}/evolution
 %dir %{_libdir}/evolution/modules/
 %dir %{_libdir}/evolution/plugins
+%{_libdir}/evolution/web-extensions
 %{_libdir}/evolution/*.so
-%{_libexecdir}/evolution/csv2vcard
-%{_libexecdir}/evolution/evolution-addressbook-export
 %{_libexecdir}/evolution/evolution-alarm-notify
 %{_libexecdir}/evolution/evolution-backup
 %{_libexecdir}/evolution/killev
@@ -160,6 +159,7 @@ cat %{name}.lang >> %{name}-%{api}.lang
 %{_datadir}/appdata/evolution.appdata.xml
 %{_datadir}/appdata/evolution-bogofilter.metainfo.xml
 %{_datadir}/appdata/evolution-spamassassin.metainfo.xml
+%{_datadir}/appdata/evolution-pst.metainfo.xml
 %{_iconsdir}/hicolor/*/apps/*
 
 %files devel
