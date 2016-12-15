@@ -144,6 +144,7 @@ cat %{name}.lang >> %{name}-%{api}.lang
 %dir %{_libdir}/evolution
 %dir %{_libdir}/evolution/modules/
 %dir %{_libdir}/evolution/plugins
+%{_libdir}/evolution/test-gio-modules
 %{_libdir}/evolution/web-extensions
 %{_libdir}/evolution/*.so
 %{_libexecdir}/evolution/evolution-alarm-notify
