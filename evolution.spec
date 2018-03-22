@@ -1,18 +1,18 @@
 %define url_ver	%(echo %{version}|cut -d. -f1,2)
 %define gstapi	1.0
-%define api	3.22
+%define api	3.28
 
 %define _disable_rebuild_configure 1
 
 Summary:	Integrated GNOME mail client, calendar and address book
 Name:		evolution
-Version:	3.22.3
+Version:	3.28.0
 Release:	1
 License: 	LGPLv2+
 Group:		Networking/Mail
 Url: 		http://www.gnome.org/projects/evolution/
 Source0: 	http://ftp.gnome.org/pub/GNOME/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
-
+BuildRequires:	cmake
 BuildRequires:	bogofilter
 BuildRequires:	gtk-doc
 BuildRequires:	highlight
@@ -55,6 +55,8 @@ BuildRequires:	pkgconfig(shared-mime-info) >= 0.22
 BuildRequires:	pkgconfig(sm)
 BuildRequires:	pkgconfig(webkit2gtk-4.0)
 BuildRequires:	pkgconfig(gtkspell3-3.0)
+BuildRequires:	pkgconfig(gnome-autoar-gtk-0)
+BuildRequires:	pkgconfig(gnome-autoar-0)
 
 Requires:	bogofilter
 # (fc) 0.8-5mdk implicit dependency is not enough
@@ -85,25 +87,26 @@ using Evolution's libraries.
 %apply_patches
 
 # Remove the welcome email from Novell
-for inbox in mail/default/*/Inbox; do
+for inbox in src/mail/default/*/Inbox; do
 	echo -n "" > $inbox
 done
 
 %build
-%configure \
-	--disable-spamassassin \
-	--disable-autoar \
-	--enable-plugins=all \
-	--with-krb5=%{_prefix} \
-	--with-krb5-libs=%{_libdir} \
-	--with-openldap=yes \
-	--with-static-ldap=no \
-	--with-sub-version="-%{release}"
+%cmake \
+	-DENABLE_MAINTAINER_MODE=OFF \
+	-DVERSION_SUBSTRING=" (%{version}-%{release})" \
+	-DENABLE_PLUGINS=all \
+	-DENABLE_YTNEF=OFF \
+	-DENABLE_INSTALLED_TESTS=OFF \
+        -DWITH_OPENLDAP=ON \
+        -DENABLE_SMIME=ON \
+        -DENABLE_GTK_DOC=ON \
+        -DWITH_HELP=ON
 
 %make
 
 %install
-%makeinstall_std
+%makeinstall_std -C build
 #remove unpackaged files
 rm -rf %{buildroot}/var/lib/
 find %{buildroot} -type f -name "*.la" -exec rm -f {} ';'
@@ -114,7 +117,7 @@ desktop-file-install --vendor="" \
 	--remove-category="ContactManagement" \
 	--add-category="Network" \
 	--dir %{buildroot}%{_datadir}/applications \
-	%{buildroot}%{_datadir}/applications/evolution.desktop
+	%{buildroot}%{_datadir}/applications/org.gnome.Evolution.desktop
 
 mkdir -p %{buildroot}%{_sysconfdir}/xdg/autostart/
 cat << EOF > %{buildroot}%{_sysconfdir}/xdg/autostart/evolution-alarm-notify.desktop
@@ -133,7 +136,6 @@ EOF
 # do not package obsolete mime-info files, evolution doesn't import them on commandline (Mdv bug #53984)
 rm -fr %{buildroot}/%{_datadir}/mime-info
 
-%find_lang %{name}-%{api} --with-gnome
 %find_lang %{name} --with-gnome
 cat %{name}.lang >> %{name}-%{api}.lang
 
@@ -144,7 +146,6 @@ cat %{name}.lang >> %{name}-%{api}.lang
 %dir %{_libdir}/evolution
 %dir %{_libdir}/evolution/modules/
 %dir %{_libdir}/evolution/plugins
-%{_libdir}/evolution/test-gio-modules
 %{_libdir}/evolution/web-extensions
 %{_libdir}/evolution/*.so
 %{_libexecdir}/evolution/evolution-alarm-notify
@@ -157,10 +158,10 @@ cat %{name}.lang >> %{name}-%{api}.lang
 %{_datadir}/evolution
 %{_datadir}/GConf/gsettings/evolution.convert
 %{_datadir}/glib-2.0/schemas/*.xml
-%{_datadir}/appdata/evolution.appdata.xml
-%{_datadir}/appdata/evolution-bogofilter.metainfo.xml
-%{_datadir}/appdata/evolution-spamassassin.metainfo.xml
-%{_datadir}/appdata/evolution-pst.metainfo.xml
+%{_datadir}/metainfo/org.gnome.Evolution.appdata.xml
+%{_datadir}/metainfo/org.gnome.Evolution-bogofilter.metainfo.xml
+%{_datadir}/metainfo/org.gnome.Evolution-spamassassin.metainfo.xml
+%{_datadir}/metainfo/org.gnome.Evolution-pst.metainfo.xml
 %{_iconsdir}/hicolor/*/apps/*
 
 %files devel
