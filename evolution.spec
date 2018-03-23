@@ -4,10 +4,12 @@
 
 %define _disable_rebuild_configure 1
 
+%define _cmake_skip_rpath %nil
+
 Summary:	Integrated GNOME mail client, calendar and address book
 Name:		evolution
 Version:	3.28.0
-Release:	1
+Release:	2
 License: 	LGPLv2+
 Group:		Networking/Mail
 Url: 		http://www.gnome.org/projects/evolution/
@@ -101,7 +103,9 @@ done
         -DWITH_OPENLDAP=ON \
         -DENABLE_SMIME=ON \
         -DENABLE_GTK_DOC=ON \
-        -DWITH_HELP=ON
+        -DWITH_HELP=ON \
+        -DCMAKE_INSTALL_LIBDIR:PATH=%{_libdir} \
+        -DLIB_INSTALL_DIR:PATH=%{_libdir}
 
 %make
 
