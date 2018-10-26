@@ -1,6 +1,6 @@
 %define url_ver	%(echo %{version}|cut -d. -f1,2)
 %define gstapi	1.0
-%define api	3.28
+%define api	3.30
 
 %define _disable_rebuild_configure 1
 
@@ -8,8 +8,8 @@
 
 Summary:	Integrated GNOME mail client, calendar and address book
 Name:		evolution
-Version:	3.28.0
-Release:	2
+Version:	3.30.2
+Release:	1
 License: 	LGPLv2+
 Group:		Networking/Mail
 Url: 		http://www.gnome.org/projects/evolution/
