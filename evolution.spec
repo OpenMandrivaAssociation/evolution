@@ -158,6 +158,7 @@ cat %{name}.lang >> %{name}-%{api}.lang
 %{_libdir}/evolution/modules/*.so
 %{_libdir}/evolution/plugins/*.so
 %{_libdir}/evolution/plugins/*.eplug
+%{_libdir}/evolution-data-server/ui-modules/module-evolution-alarm-notify.so
 %{_datadir}/applications/*
 %{_datadir}/evolution
 %{_datadir}/GConf/gsettings/evolution.convert
