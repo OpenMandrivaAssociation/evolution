@@ -152,7 +152,7 @@ cat %{name}.lang >> %{name}-%{api}.lang
 %dir %{_libdir}/evolution/plugins
 %{_libdir}/evolution/web-extensions
 %{_libdir}/evolution/*.so
-%{_libexecdir}/evolution/evolution-alarm-notify
+#{_libexecdir}/evolution/evolution-alarm-notify
 %{_libexecdir}/evolution/evolution-backup
 %{_libexecdir}/evolution/killev
 %{_libdir}/evolution/modules/*.so
