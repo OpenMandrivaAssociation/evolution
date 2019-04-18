@@ -168,6 +168,7 @@ cat %{name}.lang >> %{name}-%{api}.lang
 %{_datadir}/metainfo/org.gnome.Evolution-spamassassin.metainfo.xml
 %{_datadir}/metainfo/org.gnome.Evolution-pst.metainfo.xml
 %{_iconsdir}/hicolor/*/apps/*
+%{_mandir}/man1/evolution.1.xz
 
 %files devel
 %{_includedir}/*
