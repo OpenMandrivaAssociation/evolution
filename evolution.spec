@@ -102,7 +102,7 @@ done
 	-DENABLE_INSTALLED_TESTS=OFF \
         -DWITH_OPENLDAP=ON \
         -DENABLE_SMIME=ON \
-        -DENABLE_GTK_DOC=ON \
+        -DENABLE_GTK_DOC=OFF \
         -DWITH_HELP=ON \
         -DCMAKE_INSTALL_LIBDIR:PATH=%{_libdir} \
         -DLIB_INSTALL_DIR:PATH=%{_libdir}
