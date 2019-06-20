@@ -173,5 +173,5 @@ cat %{name}.lang >> %{name}-%{api}.lang
 %files devel
 %{_includedir}/*
 %{_libdir}/pkgconfig/*
-%doc %{_datadir}/gtk-doc/html/*
+#doc #{_datadir}/gtk-doc/html/*
 
