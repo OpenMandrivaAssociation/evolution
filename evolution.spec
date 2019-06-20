@@ -8,7 +8,7 @@
 
 Summary:	Integrated GNOME mail client, calendar and address book
 Name:		evolution
-Version:	3.32.2
+Version:	3.32.3
 Release:	1
 License: 	LGPLv2+
 Group:		Networking/Mail
@@ -107,10 +107,10 @@ done
         -DCMAKE_INSTALL_LIBDIR:PATH=%{_libdir} \
         -DLIB_INSTALL_DIR:PATH=%{_libdir}
 
-%make
+%make_build
 
 %install
-%makeinstall_std -C build
+%make_install -C build
 #remove unpackaged files
 rm -rf %{buildroot}/var/lib/
 find %{buildroot} -type f -name "*.la" -exec rm -f {} ';'
