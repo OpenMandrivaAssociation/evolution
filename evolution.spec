@@ -8,7 +8,7 @@
 
 Summary:	Integrated GNOME mail client, calendar and address book
 Name:		evolution
-Version:	3.32.4
+Version:	3.34.0
 Release:	1
 License: 	LGPLv2+
 Group:		Networking/Mail
@@ -43,7 +43,7 @@ BuildRequires:	pkgconfig(ice)
 BuildRequires:	pkgconfig(libcanberra-gtk3) >= 0.25
 BuildRequires:	pkgconfig(libebackend-1.2) >= %{version}
 BuildRequires:	pkgconfig(libebook-1.2) >= %{version}
-BuildRequires:	pkgconfig(libecal-1.2) >= %{version}
+BuildRequires:	pkgconfig(libecal-2.0) >= %{version}
 BuildRequires:	pkgconfig(libedataserver-1.2) >= %{version}
 BuildRequires:	pkgconfig(libgdata) >= 0.10.0
 BuildRequires:	pkgconfig(libnotify) >= 0.5.1
@@ -59,6 +59,7 @@ BuildRequires:	pkgconfig(webkit2gtk-4.0)
 BuildRequires:	pkgconfig(gtkspell3-3.0)
 BuildRequires:	pkgconfig(gnome-autoar-gtk-0)
 BuildRequires:	pkgconfig(gnome-autoar-0)
+BuildRequires:	pkgconfig(gspell-1)
 
 Requires:	bogofilter
 # (fc) 0.8-5mdk implicit dependency is not enough
@@ -144,7 +145,7 @@ rm -fr %{buildroot}/%{_datadir}/mime-info
 cat %{name}.lang >> %{name}-%{api}.lang
 
 %files -f %{name}-%{api}.lang
-%doc AUTHORS COPYING ChangeLog NEWS README
+%doc AUTHORS COPYING ChangeLog NEWS README.md
 %{_sysconfdir}/xdg/autostart/*.desktop
 %{_bindir}/*
 %dir %{_libdir}/evolution
