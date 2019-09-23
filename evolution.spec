@@ -59,6 +59,7 @@ BuildRequires:	pkgconfig(webkit2gtk-4.0)
 BuildRequires:	pkgconfig(gtkspell3-3.0)
 BuildRequires:	pkgconfig(gnome-autoar-gtk-0)
 BuildRequires:	pkgconfig(gnome-autoar-0)
+BuildRequires:	pkgconfig(gspell-1)
 
 Requires:	bogofilter
 # (fc) 0.8-5mdk implicit dependency is not enough
