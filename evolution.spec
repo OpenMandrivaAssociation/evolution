@@ -50,7 +50,6 @@ BuildRequires:	pkgconfig(libnotify) >= 0.5.1
 BuildRequires:	pkgconfig(libpst)
 BuildRequires:	pkgconfig(libsoup-gnome-2.4) >= 2.31.2
 BuildRequires:	pkgconfig(libxml-2.0) >= 2.7.3
-BuildRequires:	pkgconfig(libnm-glib)
 BuildRequires:	pkgconfig(nspr)
 BuildRequires:	pkgconfig(nss)
 BuildRequires:	pkgconfig(shared-mime-info) >= 0.22
