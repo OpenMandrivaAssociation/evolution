@@ -8,7 +8,7 @@
 
 Summary:	Integrated GNOME mail client, calendar and address book
 Name:		evolution
-Version:	3.34.2
+Version:	3.34.3
 Release:	1
 License: 	LGPLv2+
 Group:		Networking/Mail
@@ -86,7 +86,7 @@ using Evolution's libraries.
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 
 # Remove the welcome email from Novell
 for inbox in src/mail/default/*/Inbox; do
