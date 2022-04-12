@@ -23,6 +23,7 @@ BuildRequires:	itstool
 BuildRequires:	desktop-file-utils
 BuildRequires:	openldap-devel
 BuildRequires:	pkgconfig(atk)
+BuildRequires:	pkgconfig(libcmark)
 BuildRequires:	pkgconfig(libsecret-unstable)
 BuildRequires:	pkgconfig(cairo-gobject)
 BuildRequires:	pkgconfig(camel-1.2) >= %{version}
