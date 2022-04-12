@@ -8,7 +8,7 @@
 
 Summary:	Integrated GNOME mail client, calendar and address book
 Name:		evolution
-Version:	3.42.4
+Version:	3.44.0
 Release:	1
 License: 	LGPLv2+
 Group:		Networking/Mail
@@ -38,7 +38,7 @@ BuildRequires:	pkgconfig(goa-1.0) >= 3.1.1
 BuildRequires:	pkgconfig(gsettings-desktop-schemas) >= 2.91.92
 BuildRequires:	pkgconfig(gstreamer-%{gstapi})
 BuildRequires:	pkgconfig(gtk+-3.0) >= 3.2.0
-BuildRequires:	pkgconfig(gweather-3.0) >= 2.90.0
+BuildRequires:	pkgconfig(gweather4)
 BuildRequires:	pkgconfig(ice)
 BuildRequires:	pkgconfig(libcanberra-gtk3) >= 0.25
 BuildRequires:	pkgconfig(libebackend-1.2) >= %{version}
@@ -105,7 +105,8 @@ done
         -DENABLE_GTK_DOC=OFF \
         -DWITH_HELP=ON \
         -DCMAKE_INSTALL_LIBDIR:PATH=%{_libdir} \
-        -DLIB_INSTALL_DIR:PATH=%{_libdir}
+        -DLIB_INSTALL_DIR:PATH=%{_libdir} \
+	-DWITH_GWEATHER4=ON
 
 %make_build
 
