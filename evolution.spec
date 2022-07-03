@@ -61,6 +61,8 @@ BuildRequires:	pkgconfig(gnome-autoar-gtk-0)
 BuildRequires:	pkgconfig(gnome-autoar-0)
 BuildRequires:	pkgconfig(gspell-1)
 
+BuildRequires: locales-extra-charsets
+
 Requires:	bogofilter
 # (fc) 0.8-5mdk implicit dependency is not enough
 Requires:	evolution-data-server >= %{version}
