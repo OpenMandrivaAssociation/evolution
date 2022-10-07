@@ -8,12 +8,13 @@
 
 Summary:	Integrated GNOME mail client, calendar and address book
 Name:		evolution
-Version:	3.44.4
+Version:	3.46.0
 Release:	1
 License: 	LGPLv2+
 Group:		Networking/Mail
 Url: 		http://www.gnome.org/projects/evolution/
-Source0: 	http://ftp.gnome.org/pub/GNOME/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
+Source0: 	http://ftp.gnome.org/pub/GNOME/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.
+Patch0:		0001-I-2037-EHeaderBarButton-Avoid-busy-loop-on-toggle-ac.patch
 BuildRequires:	cmake
 BuildRequires:	bogofilter
 BuildRequires:	gtk-doc
@@ -49,13 +50,13 @@ BuildRequires:	pkgconfig(libedataserver-1.2) >= %{version}
 BuildRequires:	pkgconfig(libgdata) >= 0.10.0
 BuildRequires:	pkgconfig(libnotify) >= 0.5.1
 BuildRequires:	pkgconfig(libpst)
-BuildRequires:	pkgconfig(libsoup-gnome-2.4) >= 2.31.2
+BuildRequires:	pkgconfig(libsoup-3.0) 
 BuildRequires:	pkgconfig(libxml-2.0) >= 2.7.3
 BuildRequires:	pkgconfig(nspr)
 BuildRequires:	pkgconfig(nss)
 BuildRequires:	pkgconfig(shared-mime-info) >= 0.22
 BuildRequires:	pkgconfig(sm)
-BuildRequires:	pkgconfig(webkit2gtk-4.0)
+BuildRequires:	pkgconfig(webkit2gtk-4.1)
 BuildRequires:	pkgconfig(gtkspell3-3.0)
 BuildRequires:	pkgconfig(gnome-autoar-gtk-0)
 BuildRequires:	pkgconfig(gnome-autoar-0)
@@ -156,6 +157,7 @@ cat %{name}.lang >> %{name}-%{api}.lang
 %dir %{_libdir}/evolution/plugins
 %{_libdir}/evolution/web-extensions
 %{_libdir}/evolution/*.so
+%{_libdir}/evolution-data-server/camel-providers/libcamelrss*
 #{_libexecdir}/evolution/evolution-alarm-notify
 %{_libexecdir}/evolution/evolution-backup
 %{_libexecdir}/evolution/killev
