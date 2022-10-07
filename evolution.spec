@@ -13,7 +13,7 @@ Release:	1
 License: 	LGPLv2+
 Group:		Networking/Mail
 Url: 		http://www.gnome.org/projects/evolution/
-Source0: 	http://ftp.gnome.org/pub/GNOME/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.
+Source0: 	http://ftp.gnome.org/pub/GNOME/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 Patch0:		0001-I-2037-EHeaderBarButton-Avoid-busy-loop-on-toggle-ac.patch
 BuildRequires:	cmake
 BuildRequires:	bogofilter
