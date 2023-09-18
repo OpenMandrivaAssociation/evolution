@@ -8,12 +8,12 @@
 
 Summary:	Integrated GNOME mail client, calendar and address book
 Name:		evolution
-Version:	3.48.4
+Version:	3.50.0
 Release:	1
 License: 	LGPLv2+
 Group:		Networking/Mail
-Url: 		http://www.gnome.org/projects/evolution/
-Source0: 	http://ftp.gnome.org/pub/GNOME/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
+Url: 		https://www.gnome.org/projects/evolution/
+Source0: 	https://ftp.gnome.org/pub/GNOME/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 BuildRequires:	cmake
 BuildRequires:	bogofilter
 BuildRequires:	gtk-doc
@@ -21,7 +21,7 @@ BuildRequires:	highlight
 BuildRequires:	intltool
 BuildRequires:	itstool
 BuildRequires:	desktop-file-utils
-BuildRequires:	openldap-devel
+BuildRequires:	pkgconfig(ldap)
 BuildRequires:	pkgconfig(atk)
 BuildRequires:	pkgconfig(libcmark)
 BuildRequires:	pkgconfig(libsecret-unstable)
