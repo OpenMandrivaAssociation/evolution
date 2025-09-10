@@ -8,7 +8,7 @@
 
 Summary:	Integrated GNOME mail client, calendar and address book
 Name:		evolution
-Version:	3.56.2
+Version:	3.57.3
 Release:	1
 License: 	LGPLv2+
 Group:		Networking/Mail
@@ -88,8 +88,7 @@ This package contains the files necessary to develop applications
 using Evolution's libraries.
 
 %prep
-%setup -q
-%autopatch -p1
+%autosetup -p1
 
 # Remove the welcome email from Novell
 for inbox in src/mail/default/*/Inbox; do
@@ -168,10 +167,7 @@ cat %{name}.lang >> %{name}-%{api}.lang
 %{_datadir}/evolution
 %{_datadir}/GConf/gsettings/evolution.convert
 %{_datadir}/glib-2.0/schemas/*.xml
-%{_datadir}/metainfo/org.gnome.Evolution.appdata.xml
-%{_datadir}/metainfo/org.gnome.Evolution-bogofilter.metainfo.xml
-%{_datadir}/metainfo/org.gnome.Evolution-spamassassin.metainfo.xml
-%{_datadir}/metainfo/org.gnome.Evolution-pst.metainfo.xml
+%{_datadir}/metainfo/org.gnome.Evolution*.metainfo.xml
 %{_iconsdir}/hicolor/*/apps/*
 %{_mandir}/man1/evolution.1.*
 
