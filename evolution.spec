@@ -14,7 +14,8 @@ License: 	LGPLv2+
 Group:		Networking/Mail
 Url: 		https://www.gnome.org/projects/evolution/
 Source0: 	https://ftp.gnome.org/pub/GNOME/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
-BuildRequires:	cmake
+BuildRequires:	cmake 
+BuildRequires:  make
 BuildRequires:	bogofilter
 BuildRequires:	gtk-doc
 BuildRequires:	highlight
