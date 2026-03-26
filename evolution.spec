@@ -8,7 +8,7 @@
 
 Summary:	Integrated GNOME mail client, calendar and address book
 Name:		evolution
-Version:	3.58.2
+Version:	3.60.0
 Release:	1
 License: 	LGPLv2+
 Group:		Networking/Mail
@@ -50,7 +50,7 @@ BuildRequires:	pkgconfig(libgdata) >= 0.10.0
 BuildRequires:	pkgconfig(libnotify) >= 0.5.1
 BuildRequires:	pkgconfig(libpst)
 BuildRequires:	pkgconfig(libsoup-3.0) 
-BuildRequires:	pkgconfig(libxml-2.0) >= 2.7.3
+BuildRequires:	pkgconfig(libxml-2.0) >= 2.15.2
 BuildRequires:	pkgconfig(nspr)
 BuildRequires:	pkgconfig(nss)
 BuildRequires:	pkgconfig(shared-mime-info) >= 0.22
