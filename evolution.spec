@@ -58,7 +58,7 @@ BuildRequires:	pkgconfig(shared-mime-info) >= 0.22
 BuildRequires:	pkgconfig(sm)
 BuildRequires:	pkgconfig(webkit2gtk-4.1)
 BuildRequires:	pkgconfig(gtkspell3-3.0)
-BuildRequires:	pkgconfig(gnome-autoar-gtk-0)
+#BuildRequires:	pkgconfig(gnome-autoar-gtk-0)
 BuildRequires:	pkgconfig(gnome-autoar-0)
 BuildRequires:	pkgconfig(gspell-1)
 
